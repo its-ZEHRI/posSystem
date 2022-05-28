@@ -10,6 +10,7 @@
     {{-- ***** SLOT START ***** --}}
 
         {{--==========> ALERTS <==========--}}
+        {{-- supplier --}}
         <div id="alert">
             <button id="save_alert" class="d-none"
                 onclick="md.showNotification('top','center','Save Successfully...!','success')"></button>
