@@ -8,6 +8,7 @@
         </x-layoutUtilities.header>
     </x-slot>
     {{-- ***** SLOT START ***** --}}
+    {{-- setting --}}
     {{-- ----------------------------------- --}}
     {{-- <x-utilities.table > --}}
          {{--:users=$users ->pass the data form controller to component --}}
