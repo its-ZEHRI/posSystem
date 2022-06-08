@@ -9,6 +9,19 @@
     </x-slot>
     {{--==========> SLOT START  ==========>--}}
 
+    @if(Session::has('success'))
+        <div class="">
+            <button id="btn2" class="d-none"
+            onclick="md.showNotification('top','center','{{Session::get('success')}}','success')"></button>
+        </div>
+        <script>
+            window.onload = function(){
+            let button = document.getElementById('btn2');
+            button.onclick();
+            }
+        </script>
+    @endif
+
     {{--==========> ALERTS <==========--}}
     <div id="alert">
         <button id="save_alert" class="d-none"
@@ -19,6 +32,8 @@
         onclick="md.showNotification('top','center','Updated Successfully...!','info')"></button>
         <button id="error_alert" class="d-none"
         onclick="md.showNotification('top','center','<h3 style='+'display:inline'+'>Error...! </h3>','danger')"></button>
+        <button id="purchase_alert" class="d-none"
+        onclick="md.showNotification('top','center','<h4>Products Saved into Inventory...!</h4>','success')"></button>
     </div>
     {{--==========> ALERTS <==========--}}
 
@@ -55,7 +70,7 @@
                                                 @forelse ($categories as $category)
                                                 <div class="categ_list selected_category">
                                                     <span class="d-none">{{$category->id}}</span>
-                                                    <li  class="categ">{{$category->category}}</li>
+                                                    <li  class="categ">{{$category->name}}</li>
                                                 </div>
                                                 @empty
                                                     <li>No Category found</li>
@@ -153,26 +168,29 @@
                         <h3 class="card-title m-0 text-left text-primary ">Payment</h3>
                         <hr class="m-0">
                         <div class="px-4 mt-3">
-                            <form action="">
+                            {{-- action="purchase/productStore" method="POST" --}}
+                            <form id="purchase_payment_form" >
+                                @csrf
+                                <input id="supplier_input" type="hidden" name="supplier_id" value="">
                                 <div class="payment-card-field">
                                     <p class="m-0">Total Amount</p>
-                                    <input type="text" id="total_amount" class="form-control disabled text-primary" name="" value="0/-">
+                                    <input type="text" id="total_amount" class="form-control disabled text-primary" name="total_amount" value="0/-">
                                 </div>
                                 <div class="payment-card-field">
                                     <p class="m-0">Discount</p>
-                                    <input type="text" id="discount" class="form-control" name="" value="0/-">
+                                    <input type="text" id="discount" class="form-control" name="discount" autocomplete="off" value="0/-">
                                 </div>
                                 <div class="payment-card-field">
                                     <p class="m-0">Net Amount</p>
-                                    <input type="text" id="net_amount" class="form-control" name="" value="0/-">
+                                    <input type="text" id="net_amount" class="form-control text-muted disabled" name="net_amount" value="0/-">
                                 </div>
                                 <div class="payment-card-field">
                                     <p class="m-0">Balance</p>
-                                    <input type="text" id="balance" class="form-control" name="" value="0/-">
+                                    <input type="text" id="balance" class="form-control text-muted disabled" name="balance" value="0/-">
                                 </div>
-                                <div class="payment-card-field">
+                                <div class="payment-card-field mb-3">
                                     <p class="m-0">Paid</p>
-                                    <input type="text" id="paid" class="form-control" name="" value="0/-">
+                                    <input type="text" id="paid_amount" class="form-control" autocomplete="off" name="paid_amount" value="0/-">
                                 </div>
                                 <button id="" type="submit" class="c-btn c-btn-primary pull-center">Save</button>
                             </form>

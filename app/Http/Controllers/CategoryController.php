@@ -29,7 +29,7 @@ class CategoryController extends Controller
             'category' => 'required',
         ]);
         $category = new Category;
-        $category->category = $request->input('category');
+        $category->name = $request->input('category');
         $category->user_id  = Auth::User()->id;
         $category->save();
         return back()->with('success_response','Category Created...');

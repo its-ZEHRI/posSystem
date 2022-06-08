@@ -126,6 +126,16 @@ class TempProductController extends Controller
 
     }
 
+    public function store(Request $request){
+        $user = User::find(Auth::user()->id);
+        $temp_products = $user->temp_products;
+        $products = $temp_products->replicate([
+            'product_name',
+            'p_code'
+        ]);
+        dd($products->toArray());
+    }
+
 
 
 }

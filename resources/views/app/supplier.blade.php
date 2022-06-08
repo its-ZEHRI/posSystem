@@ -71,7 +71,7 @@
                                 <th>Name</th>
                                 <th>Contact</th>
                                 <th>Address</th>
-                                <th colspan="2" class="">Action</th>
+                                {{-- <th colspan="2" class="">Action</th> --}}
                             </thead>
                             <tbody>
 
@@ -84,7 +84,7 @@
             <div class="col-md-4">
                 <div class="card card-profile">
                     <div class="card-body payment-card">
-                        <h3 class="card-title m-0 text-left text-primary ">Transaction</h3>
+                        <h3 class="card-title m-0 text-left text-primary">Transaction</h3>
                         <hr class="m-0">
                         <div class="px-4 mt-3">
                             <form action="">

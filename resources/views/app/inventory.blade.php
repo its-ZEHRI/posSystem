@@ -33,7 +33,8 @@
                                 <th>Sale Price</th>
                                 <th>Whole Sale Price</th>
                                 <th>Quantity</th>
-                                <th colspan="2" class="text-center">Actions</th>
+                                <th>Supplier</th>
+                                {{-- <th colspan="2" class="text-center">Actions</th> --}}
                             </tr>
                         </thead>
                         <tbody class="ttt">
@@ -47,19 +48,13 @@
                                      @else
                                      {{$product->p_code}}
                                     @endif
-                                    </td>
-                                <td>{{$product->category}}</td>
+                                </td>
+                                <td>{{$product->category->name}}</td>
                                 <td>{{$product->p_price}}/-</td>
                                 <td>{{$product->s_price}}/-</td>
                                 <td>{{$product->ws_price}}/-</td>
                                 <td>{{$product->quantity}}</td>
-                                <td class="d-none">{{$product->id}}</td>
-                                <td>
-                                    <a href="#top">
-                                    <i id="" style="font-size: 20px" class="temp_edit_btn text-info fa-solid fa-pen-to-square"></i>
-                                </a>
-                            </td>
-                                <td> <a href="destroy/{{$product->id}}"><i style="font-size: 20px" class="text-rose fa-solid fa-trash-can"></i></a></td>
+                                <td>{{$product->supplier->name}}</td>
                             </tr>
                             @endforeach
                         </tbody>

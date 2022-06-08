@@ -23,6 +23,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/tempCreateData',  [TempProductController::class, 'tempCreate' ]);
         Route::post('/tempUpdateData',  [TempProductController::class, 'tempUpdate' ]);
         Route::get ('/destroy/{id}',    [TempProductController::class, 'destroy'    ]);
+        Route::post('/productStore',    [PurchaseController::class,    'store'      ])->name('productStore');
     });
 
     Route::group(['prefix' => '/supplier'],function(){

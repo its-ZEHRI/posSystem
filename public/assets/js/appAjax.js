@@ -100,6 +100,41 @@ $(document).ready(function () {
         })//END OF AJAX
     })//END OF DELETE
 
+    //  FORM OF PAYMENT CARD
+    $(this).on('submit', '#purchase_payment_form', function (event) {
+        event.preventDefault()
+        // var formData = new FormData(this);
+        var formData = {
+            'total_amount' : $('#total_amount').val().slice(0,-2),
+            'discount' : $('#discount').val().slice(0,-2),
+            'net_amount' : $('#net_amount').val().slice(0,-2),
+            'balance' : $('#balance').val().slice(0,-2),
+            'paid_amount' : $('#paid_amount').val().slice(0,-2),
+            'supplier_id' : $('#supplier_input').val()
+        }
+        console.log(formData)
+        $.ajax({
+            type: 'POST',
+            url: '/purchase/productStore',
+            data: formData,
+            success: function (response) {
+                if (response.status == 200)
+                    // alert(response.message)
+                    $('#purchase_alert').click();
+                    refresh_Temp_Product_table()
+                    $('#discount').val('0/-')
+                    $('#net_amount').val('0/-')
+                    $('#balance').val('0/-')
+                    $('#paid_amount').val('0/-')
+            },
+            error: function (response) {
+                alert('Ajax function Error...!!')
+            }
+
+        }) // END OF AJAX
+    }) // END OF PAYMENT FORM
+
+
     function refresh_Temp_Product_table(e) {
         $.ajax({
             type: 'GET',
@@ -111,13 +146,13 @@ $(document).ready(function () {
                     $('#total_amount').val('0/-')
                     $.each(response.products, function (key, item) {
                         $('#temp_table').append('<tr>\
-                        <td> '+ (key + 1) + '  </td>\
-                        <td> '+ item.product_name + '  </td>\
-                        <td> '+ item.p_code + '  </td>\
+                        <td> '+ (key + 1) + '</td>\
+                        <td> '+ item.product_name + '</td>\
+                        <td> '+ item.p_code + '</td>\
                         <td class="col_price"> '+ item.p_price + '/-</td>\
                         <td> '+ item.ws_price + '/-</td>\
                         <td> '+ item.s_price + '/-</td>\
-                        <td class="col_quantity"> '+ item.quantity + '  </td>\
+                        <td class="col_quantity"> '+ item.quantity + '</td>\
                         <td class="d-none">'+ item.id + '</td>\
                         <td>'+ "<a href='#top'><i id='' style='font-size: 20px' class='temp_edit_btn text-info fa-solid fa-pen-to-square'></i>" + '</td>\
                         <td>'+ '<button value="' + item.id + '" class="temp_delete_btn">\
@@ -150,10 +185,10 @@ $(document).ready(function () {
     // GETTING THE VALUES FROM TABLE FOR DISPLAY TO USER
     function PriceTable() {
         $('#temp_table tbody tr').each(function () {
-            var value = parseInt($(this).children('.col_price').text().slice(0, -2)) * parseInt($(this).children('.col_quantity').text().slice(0, -2))
+            var value = parseInt($(this).children('.col_price').text().slice(0, -2)) * parseInt($(this).children('.col_quantity').text())
             var total = parseInt($('#total_amount').val().slice(0, -2))
             var sub_total = value + total;
-            $('#total_amount').val(sub_total + "/-");
+            $('#total_amount').val(sub_total + "/-"); //
         })
     } // END
 
@@ -175,6 +210,7 @@ $(document).ready(function () {
             data: formdata,
             success: function (response) {
                 if (response.status == 200) {
+                    $('#add_supplier_form')[0].reset()
                     $('#save_alert').click()
                     refresh_Supplier_table()
                 }
@@ -202,10 +238,6 @@ $(document).ready(function () {
                         <td> '+ item.contact + '  </td>\
                         <td> '+ item.address + '  </td>\
                         <td class="d-none">'+ item.id + '</td>\
-                        <td>'+ "<a href='#top'><i id='' style='font-size: 20px' class='temp_edit_btn text-info fa-solid fa-pen-to-square'></i>" + '</td>\
-                        <td>'+ '<button value="' + item.id + '" class="temp_delete_btn">\
-                            <i style = "font-size: 20px" class= "text-rose fa-solid fa-trash-can" ></i>\
-                            </button>'+ '</td >\
                     </tr> ')
                     })//END OF EACH
                 }//END OF IF

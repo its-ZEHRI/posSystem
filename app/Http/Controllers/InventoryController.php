@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\TempProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,11 @@ class InventoryController extends Controller
     {
         $user = User::find(Auth::User()->id);
         // $products = TempProduct::where('user_id',Auth::User()->id)->get();
-        return view('app.inventory')->with('products',$user->temp_products);
+        // $products = $user->products;
+        // $catag = $products[2]->category_id;
+        // $catag = Category::find($catag);
+        // dd($catag->name);
+        return view('app.inventory')->with('products',$user->products);
     }
 
     /**

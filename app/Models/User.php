@@ -45,6 +45,9 @@ class User extends Authenticatable
     public function temp_products(){
         return $this->hasMany('App\Models\TempProduct');
     }
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
     public function categories(){
         return $this->hasMany('App\Models\Category');
     }
