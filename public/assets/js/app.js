@@ -10,6 +10,8 @@ $(document).ready(function () {
 
 
 
+
+
     if ($('#email').val() == '') {
     }
     else {
