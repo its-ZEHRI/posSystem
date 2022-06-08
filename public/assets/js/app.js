@@ -8,10 +8,6 @@ $(document).ready(function () {
     $('#supplier_card + div').removeClass('d-none');
     // END
 
-
-
-
-
     if ($('#email').val() == '') {
     }
     else {
@@ -272,6 +268,34 @@ $(document).ready(function () {
             console.log(total)
         }
     }
+
+    // END
+
+
+
+    // TEMPORARY TABLE SEARCH
+
+    // -----------------------------------
+    $(this).on('click','#actions_compress',function(){
+        $('.temp_table_actions').removeClass('d-none')
+        $('#action_heading').removeClass('d-none')
+        $('#actions_compress i').addClass('d-none')
+        $('#actions_expand i').removeClass('d-none')
+    })
+    $(this).on('click','#actions_expand',function(){
+        $('.temp_table_actions').addClass('d-none')
+        $('#action_heading').addClass('d-none')
+        $('#actions_expand i').addClass('d-none')
+        $('#actions_compress i').removeClass('d-none')
+    })
+    // -----------------------------------
+
+    $(this).on('focusin','#temp_table_search',function(){
+        $(this).css('border-bottom','1px solid #fff')
+    })
+    $(this).on('focusout','#temp_table_search',function(){
+        $(this).css('border-bottom','0px')
+    })
 
     // END
 

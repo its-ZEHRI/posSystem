@@ -154,8 +154,8 @@ $(document).ready(function () {
                         <td> '+ item.s_price + '/-</td>\
                         <td class="col_quantity"> '+ item.quantity + '</td>\
                         <td class="d-none">'+ item.id + '</td>\
-                        <td>'+ "<a href='#top'><i id='' style='font-size: 20px' class='temp_edit_btn text-info fa-solid fa-pen-to-square'></i>" + '</td>\
-                        <td>'+ '<button value="' + item.id + '" class="temp_delete_btn">\
+                        <td class="temp_table_actions d-none">'+ "<a href='#top'><i id='' style='font-size: 20px' class='temp_edit_btn text-info fa-solid fa-pen-to-square'></i>" + '</td>\
+                        <td class="temp_table_actions d-none">'+ '<button value="' + item.id + '" class="temp_delete_btn">\
                             <i style = "font-size: 20px" class= "text-rose fa-solid fa-trash-can" ></i>\
                             </button>'+ '</td >\
                     </tr> ')

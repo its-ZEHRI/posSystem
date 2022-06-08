@@ -127,6 +127,7 @@ html{
 }
 .payment-card-field p{
     font-size: 16px;
+    font-weight: 500;
 }
 .payment-card-field input{
     font-size: 18px;
@@ -136,6 +137,9 @@ html{
 .disabled{
     /* cursor: not-allowed; */
     pointer-events: none;
+}
+.actions{
+    cursor: pointer;
 }
 /* ************************************************* */
 
