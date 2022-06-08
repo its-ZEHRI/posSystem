@@ -8,10 +8,20 @@ $(document).ready(function () {
     $('#supplier_card + div').removeClass('d-none');
     // END
 
+
+
+
+
     if ($('#email').val() == '') {
     }
     else {
-        // $('#email').addClass('is-focused is-filled')
+        $('#email').addClass('is-focused is-filled')
+    }
+
+    if ($('#password').val() == '') {
+    }
+    else {
+        $('#password').addClass('is-focused is-filled')
     }
 
 
@@ -171,6 +181,7 @@ $(document).ready(function () {
     // WHEN USER SELECT SUPPLIER
     $(this).on('click', '.selected_supplier', function () {
         $('#temp_supplier_field').val($(this).children('span').text());
+        $('#supplier_input').val($(this).children('span').text());
     });
     // END
 
@@ -189,47 +200,78 @@ $(document).ready(function () {
     })
     // END
 
-    // PAYMENT CARD FUNCTIONALITY
-    $(this).on('click', '#discount', function () {
-        $(this).val('')
-    })
-    $(this).on('focusout', '#discount', function () {
-        if ($(this).val() == '')
-            $(this).val('0/-')
+
+    $(this).on('click','#discount',function(){
+        if($(this).val() == '0/-')
+            $(this).val('')
         else
-            $(this).val($(this).val()+'/-')
-    })
-    // ---------------------------------
-    $(this).on('click', '#net_amount', function () {
-        $(this).val('')
-    })
-    $(this).on('focusout', '#net_amount', function () {
-        if ($(this).val() == '')
-            $(this).val('0/-')
-        else
-            $(this).val($(this).val()+'/-')
-    })
-    // ---------------------------------
-    $(this).on('click', '#balance', function () {
-        $(this).val('')
-    })
-    $(this).on('focusout', '#balance', function () {
-        if ($(this).val() == '')
-            $(this).val('0/-')
-        else
-            $(this).val($(this).val()+'/-')
-    })
-    // ---------------------------------
-    $(this).on('click', '#paid', function () {
-        $(this).val('')
-    })
-    $(this).on('focusout', '#paid', function () {
-        if ($(this).val() == '')
-            $(this).val('0/-')
-        else
-            $(this).val($(this).val()+'/-')
+            $(this).val( $(this).val().slice(0,-2) )
     })
 
+    $(this).on('keyup','#discount',function(){
+        if($(this).val() == '')
+            {$('#net_amount').val( $('#total_amount').val() )
+            $('#balance').val( $('#total_amount').val() )
+    }else{
+            var amount =  parseInt($('#total_amount').val()) - parseInt($(this).val())
+            console.log(parseInt($('#total_amount').val()))
+            console.log(parseInt($(this).val()))
+            $('#net_amount').val(amount + '/-')
+            $('#balance').val(amount + '/-')
+        }
+    })
+
+    $(this).on('focusout','#discount',function(){
+        if( $(this).val() == '' )
+            $(this).val('0/-')
+        else
+            $(this).val( $(this).val() + '/-')
+    })
+
+
+    // ---------------------------------
+
+    $(this).on('click','#paid_amount',function(){
+        if($(this).val() == '0/-')
+            $(this).val('')
+        else
+            $(this).val( $(this).val().slice(0,-2) )
+    })
+
+    $(this).on('keyup','#paid_amount',function(){
+        if($(this).val() == '')
+            $('#balance').val( $('#net_amount').val() )
+        else{
+            var amount =  parseInt($('#net_amount').val()) - parseInt($(this).val())
+            console.log(parseInt($('#total_amount').val()))
+            console.log(parseInt($(this).val()))
+            $('#balance').val(amount + '/-')
+        }
+    })
+
+    $(this).on('focusout','#paid_amount',function(){
+        if( $(this).val() == '' )
+            $(this).val('0/-')
+        else
+            $(this).val( $(this).val() + '/-')
+    })
+
+
+    function payment_check(){
+        var discount = parseInt( $('#discount').val().slice(0,-2))
+        var balance  = parseInt( $('#balance').val().slice(0,-2))
+        var paid     = parseInt( $('#paid_amount').val().slice(0,-2))
+        var total = discount + balance + paid
+        if(parseInt($('#total_amount').val().slice(0,-2)) == total)
+        {
+            console.log('ys')
+        }
+        else
+        {
+            console.log('no')
+            console.log(total)
+        }
+    }
 
     // END
 

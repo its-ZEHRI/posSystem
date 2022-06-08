@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\Purchase;
+use illuminate\Database\Eloquent;
 
 class PurchaseController extends Controller
 {
@@ -43,7 +46,28 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $request['user_id'] = Auth::User()->id;
+        // dd($request->all());
+        $values = Purchase::Create($request->all());
+
+        $user = User::find(Auth::user()->id);
+        $products = $user->temp_products;
+
+        foreach ($products as $product) {
+            $product['purchase_id'] = $values->id;
+            Product::create($product->toArray());
+        }
+        TempProduct::where('user_id', $user->id)->delete();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'done'
+        ]);
+
+
+
     }
 
     /**
