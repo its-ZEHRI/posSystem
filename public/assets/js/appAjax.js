@@ -195,6 +195,35 @@ $(document).ready(function () {
     // <====================>  PURCHASE PAGE END  <====================>
 
 
+    // <====================>  CUSTOMER PAGE <====================>
+
+    $(this).on('submit', '#add_customer_form', function (event) {
+        event.preventDefault()
+        var formdata = {
+            'name' : $('#customer_name').val(),
+            'contact' : $('#customer_contact').val(),
+            'address': $('#customer_address').val(),
+        }
+        $.ajax({
+            type : 'POST',
+            url  : 'supplier/createSupplier',
+            data: formdata,
+            success: function (response) {
+                if (response.status == 200) {
+                    $('#add_supplier_form')[0].reset()
+                    $('#save_alert').click()
+                    refresh_Supplier_table()
+                }
+                else
+                    $('#error_alert').click()
+            },
+            error: function (response) {
+                $('#error_alert').click()
+            },
+        })//END OF AJAX
+    })//END OF SUBMIT
+
+    // <====================>  CUSTOMER PAGE END <====================>
     // <====================>  SUPPLIER PAGE <====================>
 
     $(this).on('submit', '#add_supplier_form', function (event) {

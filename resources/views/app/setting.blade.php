@@ -48,7 +48,6 @@
         </div>
     </div>
 
-
     {{-- ***** SLOT END ***** --}}
     <x-slot name="footer">
         <x-layoutUtilities.footer>
