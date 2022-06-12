@@ -9,9 +9,7 @@
     </x-slot>
     {{-- ***** SLOT START ***** --}}
         <x-utilities.banner title="Create User Account" subtitle="">
-            <form action="#" method="POST">
-
-            </form>
+            
         </x-utilities.banner>
     {{-- *****  SLOT END  ****** --}}
     <x-slot name="footer">

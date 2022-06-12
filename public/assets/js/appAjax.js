@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     refresh_Temp_Product_table();
     refresh_Supplier_table();
+    refresh_Customers_table();
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')}
     })
@@ -195,6 +196,63 @@ $(document).ready(function () {
     // <====================>  PURCHASE PAGE END  <====================>
 
 
+    // <====================>  CUSTOMER PAGE <====================>
+
+    $(this).on('submit', '#add_customer_form', function (event) {
+        event.preventDefault()
+        var formdata = {
+            'name' : $('#customer_name').val(),
+            'email' : $('#customer_email').val(),
+            'contact' : $('#customer_contact').val(),
+            'address': $('#customer_address').val(),
+        }
+        $.ajax({
+            type : 'POST',
+            url  : '/customer/createCustomer',
+            data: formdata,
+            success: function (response) {
+                if (response.status == 200) {
+                    $('#add_customer_form')[0].reset()
+                    $('#save_alert').click()
+                    refresh_Customers_table();
+                }
+                else
+                    $('#error_alert').click()
+            },
+            error: function (response) {
+                $('#error_alert').click()
+            },
+        })//END OF AJAX
+    })//END OF SUBMIT
+
+    function refresh_Customers_table() {
+        $.ajax({
+            type: 'GET',
+            url: '/refreshCustomer',
+            success: function (response) {
+                if (response.status == 200) {
+                    $('#customer_table tbody').html('')
+                    $.each(response.customers, function (key, item) {
+                        $('#customer_table').append('<tr>\
+                        <td> '+ (key + 1) +    '  </td>\
+                        <td> '+ item.name +    '  </td>\
+                        <td> '+ item.email +    '  </td>\
+                        <td> '+ item.contact + '  </td>\
+                        <td> '+ item.address + '  </td>\
+                        <td class="d-none">'+ item.id + '</td>\
+                    </tr> ')
+                    })//END OF EACH
+                }//END OF IF
+                else {
+                    $('#error_alert').click()
+                }
+            },//END OF SUCCESS
+            error: function (response) {
+                $('#error_alert').click()
+            }
+        })//END OF AJAX
+    }//END OF REFRESH
+    // <====================>  CUSTOMER PAGE END <====================>
     // <====================>  SUPPLIER PAGE <====================>
 
     $(this).on('submit', '#add_supplier_form', function (event) {
