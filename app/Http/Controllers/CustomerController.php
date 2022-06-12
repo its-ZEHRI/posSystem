@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -13,7 +16,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        return view('app.customers')->with('customers',Customer::all());
     }
 
     /**
@@ -34,7 +37,36 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $customer = new Customer;
+        $customer->name = $request->input('name');
+        if($request->input('email') == '')
+            $customer->email = 'N/A';
+        else
+            $customer->email = $request->input('email');
+        if($request->input('contact') == '')
+            $customer->contact = 'N/A';
+        else
+            $customer->contact = $request->input('contact');
+        if($request->input('address') == '')
+            $customer->address = 'N/A';
+        else
+            $customer->address = $request->input('address');
+        $customer->user_id = Auth::user()->id;
+        $customer->save();
+
+        if($customer){
+            return response()->json([
+                'status' => 200,
+                'message' => 'Customer Created Successfully...!'
+            ]);
+        }
+        return response()->json([
+            'status' => 400,
+            'message' => 'Error...!'
+        ]);
     }
 
     /**
@@ -45,7 +77,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -80,5 +112,14 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function refresh(){
+        // dd('working');
+        $user = User::find(Auth::user()->id);
+        return response()->json([
+            'status' => 200,
+            'customers' => $user->customers
+        ]);
     }
 }

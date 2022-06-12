@@ -54,4 +54,7 @@ class User extends Authenticatable
     public function Suppliers(){
         return $this->hasMany('App\Models\Supplier');
     }
+    public function Customers(){
+        return $this->hasMany(Customer::class);
+    }
 }
