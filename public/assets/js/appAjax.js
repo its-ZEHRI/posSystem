@@ -146,20 +146,25 @@ $(document).ready(function () {
                     $('#total_amount').val('0/-')
                     $.each(response.products, function (key, item) {
                         $('#temp_table').append('<tr>\
-                        <td> '+ (key + 1) + '</td>\
-                        <td> '+ item.product_name + '</td>\
-                        <td> '+ item.p_code + '</td>\
-                        <td class="col_price"> '+ item.p_price + '/-</td>\
-                        <td> '+ item.ws_price + '/-</td>\
-                        <td> '+ item.s_price + '/-</td>\
-                        <td class="col_quantity"> '+ item.quantity + '</td>\
+                        <td>'+ (key + 1) + '</td>\
+                        <td>'+ item.product_name + '</td>\
+                        <td>'+ item.p_code + '</td>\
+                        <td class="col_price">'+ item.p_price + '/-</td>\
+                        <td>'+ item.ws_price + '/-</td>\
+                        <td>'+ item.s_price + '/-</td>\
+                        <td class="col_quantity">'+ item.quantity + '</td>\
                         <td class="d-none">'+ item.id + '</td>\
+                        <td class="d-none">'+ item.name + '</td>\
+                        <td class="d-none">'+ item.category_id + '</td>\
                         <td class="temp_table_actions d-none">'+ "<a href='#top'><i id='' style='font-size: 20px' class='temp_edit_btn text-info fa-solid fa-pen-to-square'></i>" + '</td>\
                         <td class="temp_table_actions d-none">'+ '<button value="' + item.id + '" class="temp_delete_btn">\
-                            <i style = "font-size: 20px" class= "text-rose fa-solid fa-trash-can" ></i>\
-                            </button>'+ '</td >\
+                        <i style = "font-size: 20px" class= "text-rose fa-solid fa-trash-can" ></i>\
+                        </button>'+ '</td >\
                     </tr> ')
                     })//END OF EACH
+                    $('#action_heading').addClass('d-none');
+                    $('#actions_expand i').addClass('d-none')
+                    $('#actions_compress i').removeClass('d-none')
                     PriceTable()
                 }//END OF IF
                 else {

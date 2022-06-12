@@ -52,7 +52,7 @@
                             <div class="col-md-4">
                                 <div class="mt-3">
                                     {{-- <h5 class="text-primary" style="font-weight: normal"><span class="mr-2">S-NO </span>{{count($temp_products)+1}}</h5> --}}
-                                    <h5 class="text-primary" style="font-weight: normal"><span class="mr-2">S-NO </span><span id="s_no">{{count($temp_products)+1}}</span></h5>
+                                    {{-- <h5 class="text-primary" style="font-weight: normal">`<span class="mr-2">S-NO </span><span id="s_no">{{count($temp_products)+1}}</span></h5> --}}
                                 </div>
                             </div>
                             {{-- <====> CATEGORY DROPDOWN <=====> --}}
@@ -60,7 +60,7 @@
                                 <div style=" @error('category_id') {{'border-bottom: 4px solid red'}} @enderror">
                                     <div class="card card-plain mb-0 mt-4 p-0" style="position: relative">
                                         <div id="category_card" class="card-header card-header-primary d-flex justify-content-between align-items-center" style="padding: 5px 15px 3px 15px">
-                                            <h5 style="height: 1.5rem; overflow-y:hidden; width:90%"
+                                            <h5 id="category_name" style="height: 1.5rem; overflow-y:hidden; width:90%"
                                              class="card-title">Category</h5>
                                             <i id="catg_arrow" class="fa-solid fa-angle-down"></i>
                                         </div>

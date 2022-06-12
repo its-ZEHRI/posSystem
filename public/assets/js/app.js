@@ -131,6 +131,8 @@ $(document).ready(function () {
         $('#temp_p_id_field'    ).val($row.find("td:eq(7)").text());
         $('#purchase_form_btn'  ).text('Update');
         $('#purchase_form_btn'  ).attr('id', 'purchase_form_update_btn');
+        $('#category_name').text($row.find("td:eq(8)").text())
+        $('#temp_category_field').val($row.find("td:eq(9)").text())
     });
 
     $(this).on('click', '#category_card', function () {
