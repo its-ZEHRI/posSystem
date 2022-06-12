@@ -54,7 +54,8 @@
                                 <td>{{$product->s_price}}/-</td>
                                 <td>{{$product->ws_price}}/-</td>
                                 <td>{{$product->quantity}}</td>
-                                <td>{{$product->supplier->name}}</td>
+                                {{-- <td>{{$product->supplier->name}}</td> --}}
+                                {{-- error in supplier name --}}
                             </tr>
                             @endforeach
                         </tbody>

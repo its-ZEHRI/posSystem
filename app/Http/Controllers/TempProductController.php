@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\TempProduct;
 use Illuminate\Support\Facades\Auth;
 use app\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class TempProductController extends Controller
 {
@@ -55,14 +56,16 @@ class TempProductController extends Controller
 
     public function refresh(){
         $user = User::find(Auth::user()->id);
-        $products = $user->temp_products;
-        // $products = TempProduct::with('categories')->where('user_id',Auth::user()->id)->get();
-        // $category = Category::w('id', $products->category_id);
+        // $products = $user->temp_products;
+        $products = DB::table('temp_products')
+        ->join('categories', 'temp_products.category_id', '=', 'categories.id')
+        ->select('temp_products.*', 'categories.name')->where('temp_products.user_id' , $user->id)->get();
+
+        // dd($products);
         return response()->json([
             'status'     => 200,
             'message'    => 'data get successfully',
             'products'   => $products,
-            // 'categories' => $category,
         ]);
     }
 
