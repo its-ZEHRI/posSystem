@@ -1,4 +1,4 @@
-<x-layout.applayout noHeader  noFooter>
+<x-layout.applayout >
     <x-slot name="sidebar">
         <x-layoutUtilities.sidebar>
         </x-layoutUtilities.sidebar>
