@@ -64,39 +64,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Purchase Price</label>
-                            <input id="temp_p_price_field" type="text" name="p_price" class="form-control" value="{{old('p_price')}}"
-                            style="@error('p_price'){{ 'border-bottom: 2px solid red; padding-left: 10px!important'}} @enderror">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Sale Price</label>
-                            <input id="temp_s_price_field" type="text" name="s_price" class="form-control" value="{{old('s_price')}}"
-                            style="@error('s_price'){{ 'border-bottom: 2px solid red; padding-left: 10px!important'}} @enderror">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Whole Sale Price</label>
-                            <input id="temp_ws_price_field" type="text" name="ws_price" class="form-control" value="{{old('ws_price')}}"
-                            style="@error('ws_price'){{ 'border-bottom: 2px solid red; padding-left: 10px!important'}} @enderror">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 pt-2">
-                        <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Quantity</label>
-                            <input id="temp_quantity_field" type="text" name="quantity" class="form-control" value="{{old('quantity')}}"
-                             style="@error('quantity'){{ 'border-bottom: 2px solid red; padding-left: 10px!important'}} @enderror">
-                        </div>
-                    </div>
-
-                </div>
                 <hr>
                 <button id="purchase_form_btn" type="submit" class="c-btn c-btn-primary pull-right">Enter</button>
                 <button id="purchase_form_clear_btn" class="c-btn c-btn-secondary pull-right mr-3">Clear</button>
