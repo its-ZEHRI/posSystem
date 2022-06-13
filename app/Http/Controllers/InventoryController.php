@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\TempProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +19,15 @@ class InventoryController extends Controller
     public function index()
     {
         $user = User::find(Auth::User()->id);
+        $products = Product::where('user_id','=',$user->id)->paginate(20);
+        $categories = $user->categories;
         // $products = TempProduct::where('user_id',Auth::User()->id)->get();
         // $products = $user->products;
         // $catag = $products[2]->category_id;
         // $catag = Category::find($catag);
         // dd($catag->name);
-        return view('app.inventory')->with('products',$user->products);
+        return view('app.inventory')->with('products',$products)
+                                    ->with('categories',$categories);
     }
 
     /**

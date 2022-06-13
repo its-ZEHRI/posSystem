@@ -14,6 +14,35 @@
 
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <div style="{{-- @error('category_id')'border' bottom: 4px solid red' @enderror--}}">
+                        <div class="card card-plain mb-0 mt-4 p-0" style="position: relative">
+                            <div id="category_card" class="card-header card-header-primary d-flex justify-content-between align-items-center" style="padding: 5px 15px 3px 15px">
+                                <h5 style="height: 1.5rem; overflow-y:hidden; width:90%"
+                                 class="card-title">Category</h5>
+                                <i id="catg_arrow" class="fa-solid fa-angle-down"></i>
+                            </div>
+                            <div class="card-body d-none bg-white rounded w-100 custom-dropdown"
+                                 style="position: absolute; top:15px; z-index:111">
+                                <ul class="category-list">
+                                    @forelse ($categories as $category)
+                                    <div class="categ_list selected_category">
+                                        <span class="d-none">{{$category->id}}</span>
+                                        <li  class="categ">{{$category->name}}</li>
+                                    </div>
+                                    @empty
+                                        <li>No Category found</li>
+                                    @endforelse
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            
             <div class="col-md-12">
               <div class="card card-plai">
                 <div class="card-header card-header-primary">
@@ -59,6 +88,10 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $products->links() }}
+                    </div>
+                   
                   </div>
                 </div>
               </div>
