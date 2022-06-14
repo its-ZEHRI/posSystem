@@ -174,6 +174,14 @@ $(document).ready(function () {
     $(this).on('click', '.selected_category', function () {
         $('#temp_category_field').val($(this).children('span').text());
     });
+
+    // SEARCH IN THE CATEGORY DROPDOWN FOR CATERGORY
+    $(this).on('click','#category_filter',function(){
+        $('#category_card + div').slidedown(500);
+        $('#supplier_card + div').slidedown(500);
+        $('#category_card i').addClass('rotation')
+        $('#supplier_card i').addClass('rotation')
+    })
     // END
 
     // WHEN USER SELECT SUPPLIER
@@ -181,7 +189,14 @@ $(document).ready(function () {
         $('#temp_supplier_field').val($(this).children('span').text());
         $('#supplier_input').val($(this).children('span').text());
     });
-    // END
+
+    // SEARCH IN THE SUPPLIER DROPDOWN FOR SUPPLIER
+    $(this).on('click','#supplier_filter',function(){
+        $('#category_card + div').slidedown(500);
+        $('#supplier_card + div').slidedown(500);
+        $('#category_card i').addClass('rotation')
+        $('#supplier_card i').addClass('rotation')
+    })//END
 
     // CLEAR THE PURCHASE FORM
     $(this).on('click', '#purchase_form_clear_btn', function (event) {
