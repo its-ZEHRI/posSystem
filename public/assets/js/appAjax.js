@@ -155,8 +155,8 @@ $(document).ready(function () {
                         <td>'+ item.s_price + '/-</td>\
                         <td class="col_quantity">'+ item.quantity + '</td>\
                         <td class="d-none">'+ item.id + '</td>\
-                        <td class="d-none">'+ item.name + '</td>\
-                        <td class="d-none">'+ item.category_id + '</td>\
+                        <td class="d-non">'+ item.name + '</td>\
+                        <td class="d-non">'+ item.category_id + '</td>\
                         <td class="temp_table_actions d-none">'+ "<a href='#top'><i id='' style='font-size: 20px' class='temp_edit_btn text-info fa-solid fa-pen-to-square'></i>" + '</td>\
                         <td class="temp_table_actions d-none">'+ '<button value="' + item.id + '" class="temp_delete_btn">\
                         <i style = "font-size: 20px" class= "text-rose fa-solid fa-trash-can" ></i>\
@@ -195,6 +195,8 @@ $(document).ready(function () {
             var total = parseInt($('#total_amount').val().slice(0, -2))
             var sub_total = value + total;
             $('#total_amount').val(sub_total + "/-"); //
+            $('#net_amount').val(sub_total + "/-"); //
+            $('#balance').val(sub_total + "/-"); //
         })
     } // END
 

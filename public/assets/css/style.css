@@ -50,26 +50,41 @@ html{
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5)!important;
 }
 .rotation{
-    /* transform: 0.5s; */
+    transition: 1s;
     transform: rotate(180deg);
 }
-.category-list, .supplier-list{
+
+.category-list, .supplier-list, .costumer-list{
     padding: 0;
     margin: 0;
     list-style-type: none;
     overflow-y: auto;
     max-height: 10rem;
 }
-.category-list li, .supplier-list li{
+.category-list li, .supplier-list li ,.costumer-list li{
     padding: 5px;
-    /* margin-bottom: 5px; */
     cursor: pointer;
 }
-.category-list li:hover, .supplier-list li:hover{
+.category-list li:hover, .supplier-list li:hover ,.costumer-list li:hover{
     transform: scale(1.01);
     background-color: rgba(0, 0, 0, 0.05);
-    /* box-shadow : 1px 1px 3px rgba(0,0,0,0.5); */
+}
+#category_filter button, #supplier_filter button{
+    position: absolute;
+    top: -5px;
+    right: 0;
+}
+#category_filter input, #supplier_filter input{
+    padding-right: 2.5rem;
+}
 
+#product_filter button{
+    position: absolute;
+    top: -14px;
+    right: 0;
+}
+#product_filter input{
+    font-size: 20px;
 }
 
 .card .card-header-primary .card-icon,
@@ -142,6 +157,16 @@ html{
 }
 /* ************************************************* */
 
+
+/* SALE PAGE START */
+
+#filter-sale-productt{
+    /* margin-top: 50px; */
+    /* width: 50px!important; */
+    height: 12.3rem!important;
+    overflow-y: scroll;
+}
+/* SALE PAGE END */
 
 /**
 * Template Name: Scaffold - v4.7.0

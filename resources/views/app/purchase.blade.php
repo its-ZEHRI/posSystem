@@ -60,12 +60,19 @@
                                 <div style=" @error('category_id') {{'border-bottom: 4px solid red'}} @enderror">
                                     <div class="card card-plain mb-0 mt-4 p-0" style="position: relative">
                                         <div id="category_card" class="card-header card-header-primary d-flex justify-content-between align-items-center" style="padding: 5px 15px 3px 15px">
-                                            <h5 id="category_name" style="height: 1.5rem; overflow-y:hidden; width:90%"
-                                             class="card-title">Category</h5>
+                                            <h5 id="category_name" style="height: 1.5rem; overflow-y:hidden; width:90%" class="card-title">Category</h5>
                                             <i id="catg_arrow" class="fa-solid fa-angle-down"></i>
                                         </div>
-                                        <div class="card-body d-none bg-white rounded w-100 custom-dropdown"
-                                             style="position: absolute; top:15px; z-index:111">
+                                        <div class="card-body d-none bg-white rounded w-100 custom-dropdown" style="position: absolute; top:15px; z-index:111">
+                                             <div id="category_filter" class="b">
+                                                <div class="input-group no-border ">
+                                                    <input id="" type="text" value="" style="" class="form-control" placeholder="Search Category...">
+                                                    <button type="" class="btn btn-sm btn-dark btn-round btn-just-icon">
+                                                    <i class="material-icons">search</i>
+                                                    <div class="ripple-container"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
                                             <ul class="category-list">
                                                 @forelse ($categories as $category)
                                                 <div class="categ_list selected_category">
@@ -75,6 +82,7 @@
                                                 @empty
                                                     <li>No Category found</li>
                                                 @endforelse
+
                                             </ul>
                                         </div>
                                     </div>
@@ -89,8 +97,16 @@
                                              class="card-title">Supplier</h5>
                                             <i class="fa-solid fa-angle-down"></i>
                                         </div>
-                                        <div class="card-body card-wrapper d-none bg-white rounded w-100 custom-dropdown"
-                                             style="position: absolute; top:15px; z-index:111">
+                                        <div class="card-body card-wrapper d-none bg-white rounded w-100 custom-dropdown" style="position: absolute; top:15px; z-index:111">
+                                             <div id="supplier_filter">
+                                                <div class="input-group no-border ">
+                                                    <input id="" type="text" value="" style="" class="form-control" placeholder="Search Supplier...">
+                                                    <button type="" class="btn btn-sm btn-dark btn-round btn-just-icon">
+                                                    <i class="material-icons">search</i>
+                                                    <div class="ripple-container"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         <ul class="supplier-list">
                                             @forelse($suppliers as $supplier)
                                                 <div class="supp_list selected_supplier">
@@ -213,17 +229,17 @@
                       <span id="actions_compress" class="actions"><i class="fa-solid fa-compress"></i></span>
                       <span id="actions_expand" class="actions"><i class="fa-solid fa-expand d-none"></i></span>
                     </div>
-                      <div class="navbar-form  w-50">
-                    <div class="input-group no-border ">
-                        <input id="temp_table_search" type="text" value="" style="color: #fff" class="form-control" placeholder="Search...">
-                        <button type="" class="btn btn-white btn-round btn-just-icon">
+                    <div class="navbar-form  w-50">
+                        <div class="input-group no-border ">
+                            <input id="temp_table_search" type="text" value="" style="color: #fff" class="form-control" placeholder="Search...">
+                            <button type="" class="btn btn-white btn-round btn-just-icon">
                             {{-- <div class="d-flex justify-content-center align-items-center"> --}}
-                                <i class="material-icons">search</i>
-                                <div class="ripple-container"></div>
-                                {{-- </div> --}}
+                            <i class="material-icons">search</i>
+                            <div class="ripple-container"></div>
+                            {{-- </div> --}}
                             </button>
+                        </div>
                     </div>
-                </div>
                   {{-- <p class="card-category">Inventory</p> --}}
                 </div>
                 <div class="card-body">
@@ -238,6 +254,8 @@
                                 <th>Sale Price</th>
                                 <th>Whole Sale Price</th>
                                 <th>Quantity</th>
+                                <th>category name</th>
+                                <th>category id</th>
                                 <th id="action_heading" colspan="2" class="text-center d-none">Action</th>
                                 {{-- <th id="actions_compress" colspan="2" class="text-center actions"><i class="fa-solid fa-compress"></i></th>
                                 <th id="actions_expand" colspan="2" class="text-center actions"><i class="fa-solid fa-expand d-none"></i></th> --}}
