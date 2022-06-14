@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TempProductController;
 
@@ -46,9 +47,7 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('setting', [CategoryController::class, 'index']);
 
 
-    Route::get('sale',function(){
-        return view('app.sale');
-    });
+    Route::get('sale', [SaleController::class, 'index']);
 
 });// END OF AUTH MIDDLEWARE
 

@@ -22,7 +22,7 @@ class PurchaseController extends Controller
     public function index(){
         $user = User::find(Auth::User()->id);
         return view('app.purchase')
-               ->with('temp_products', $user->temp_products)
+            //    ->with('temp_products', $user->temp_products)
                ->with('categories'   , $user->categories)
                ->with('suppliers'    , $user->suppliers);
     }

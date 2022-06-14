@@ -8,10 +8,6 @@ $(document).ready(function () {
     $('#supplier_card + div').removeClass('d-none');
     // END
 
-
-
-
-
     if ($('#email').val() == '') {
     }
     else {
@@ -135,6 +131,8 @@ $(document).ready(function () {
         $('#temp_p_id_field'    ).val($row.find("td:eq(7)").text());
         $('#purchase_form_btn'  ).text('Update');
         $('#purchase_form_btn'  ).attr('id', 'purchase_form_update_btn');
+        $('#category_name').text($row.find("td:eq(8)").text())
+        $('#temp_category_field').val($row.find("td:eq(9)").text())
     });
 
     $(this).on('click', '#category_card', function () {
@@ -176,6 +174,14 @@ $(document).ready(function () {
     $(this).on('click', '.selected_category', function () {
         $('#temp_category_field').val($(this).children('span').text());
     });
+
+    // SEARCH IN THE CATEGORY DROPDOWN FOR CATERGORY
+    $(this).on('click','#category_filter',function(){
+        $('#category_card + div').slidedown(500);
+        $('#supplier_card + div').slidedown(500);
+        $('#category_card i').addClass('rotation')
+        $('#supplier_card i').addClass('rotation')
+    })
     // END
 
     // WHEN USER SELECT SUPPLIER
@@ -183,7 +189,14 @@ $(document).ready(function () {
         $('#temp_supplier_field').val($(this).children('span').text());
         $('#supplier_input').val($(this).children('span').text());
     });
-    // END
+
+    // SEARCH IN THE SUPPLIER DROPDOWN FOR SUPPLIER
+    $(this).on('click','#supplier_filter',function(){
+        $('#category_card + div').slidedown(500);
+        $('#supplier_card + div').slidedown(500);
+        $('#category_card i').addClass('rotation')
+        $('#supplier_card i').addClass('rotation')
+    })//END
 
     // CLEAR THE PURCHASE FORM
     $(this).on('click', '#purchase_form_clear_btn', function (event) {
@@ -272,6 +285,34 @@ $(document).ready(function () {
             console.log(total)
         }
     }
+
+    // END
+
+
+
+    // TEMPORARY TABLE SEARCH
+
+    // -----------------------------------
+    $(this).on('click','#actions_compress',function(){
+        $('.temp_table_actions').removeClass('d-none')
+        $('#action_heading').removeClass('d-none')
+        $('#actions_compress i').addClass('d-none')
+        $('#actions_expand i').removeClass('d-none')
+    })
+    $(this).on('click','#actions_expand',function(){
+        $('.temp_table_actions').addClass('d-none')
+        $('#action_heading').addClass('d-none')
+        $('#actions_expand i').addClass('d-none')
+        $('#actions_compress i').removeClass('d-none')
+    })
+    // -----------------------------------
+
+    $(this).on('focusin','#temp_table_search',function(){
+        $(this).css('border-bottom','1px solid #fff')
+    })
+    $(this).on('focusout','#temp_table_search',function(){
+        $(this).css('border-bottom','0px')
+    })
 
     // END
 
