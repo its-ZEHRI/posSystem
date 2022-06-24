@@ -9,7 +9,7 @@
     </x-slot>
     {{-- ***** SLOT START ***** --}}
         <x-utilities.banner title="Create User Account" subtitle="">
-            
+
         </x-utilities.banner>
     {{-- *****  SLOT END  ****** --}}
     <x-slot name="footer">

@@ -94,15 +94,15 @@
                         <div class="px-4 mt-3">
                             <form action="">
                                 <div class="payment-card-field">
-                                    <p class="m-0">Total Amount</p>
+                                    <p class="m-0">Credit</p>
                                     <input type="text" id="total_amount" class="form-control" name="" value="0/-">
                                 </div>
                                 <div class="payment-card-field">
-                                    <p class="m-0">Discount</p>
+                                    <p class="m-0">Debit</p>
                                     <input type="text" id="discount" class="form-control" name="" value="0/-">
                                 </div>
                                 <div class="payment-card-field">
-                                    <p class="m-0">Net Amount</p>
+                                    <p class="m-0">Balance</p>
                                     <input type="text" id="net_amount" class="form-control" name="" value="0/-">
                                 </div>
                                 <button id="" type="submit" class="c-btn c-btn-primary mt-3 pull-center">Save</button>

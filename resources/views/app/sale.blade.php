@@ -23,8 +23,8 @@
 
 {{--==========> ALERTS <==========--}}
 <div id="alert">
-    <button id="" class="d-none"
-        onclick="md.showNotification('top','center','Save Successfully...!','success')"></button>
+    <button id="product_added_to_cart_alert" class="d-none"
+        onclick="md.showNotification('top','center','Product Added to Cart...!','info')"></button>
     </div>
 {{--==========> ALERTS <==========--}}
 
@@ -60,17 +60,16 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <ul class="costumer-list">
-                                        {{-- @forelse ($categories as $category)
+                                    <ul class="sale/costumer-list">
+                                        @forelse ($customers as $customer)
                                         <div class="categ_list selected_category">
-                                            <span class="d-none">{{$category->id}}</span>
-                                            <li  class="categ">{{$category->name}}</li>
+                                            <span class="d-none">{{$customer->id}}</span>
+                                            <li  class="categ">{{$customer->name}}</li>
                                         </div>
                                         @empty
-                                            <li>No Category found</li>
-                                        @endforelse --}}
-                                        <li>john</li>
-                                        <li>Doe</li>
+                                            <li>No customer found</li>
+                                        @endforelse
+
                                     </ul>
                                 </div>
                             </div>
@@ -88,7 +87,7 @@
                     <div class="col-md-12 my-3">
                         <div id="product_filter" class="b">
                             <div class="input-group no-border ">
-                                <input id="" type="text" value="" style="" class="form-control" placeholder="Search Product...">
+                                <input id="product_search_input" type="text" value="" style="" class="form-control" placeholder="Search Product...">
                                 <button type="" class="btn btn-dark btn-round btn-just-icon">
                                 <i class="material-icons">search</i>
                                 <div class="ripple-container"></div>
@@ -99,6 +98,23 @@
                 </div>
                 {{--==========> TABLE OF PRODUCT <==========--}}
                 <div class="row">
+                    <div class="col-md-12 mt-1">
+                        <table id="sale_page_product_table"  class="table table-hover border">
+                            <thead  class="text-primary">
+                                <tr>
+                                    <th>S NO</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Sale</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sale_product_table">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {{-- <div class="row">
                     <div class="col-md-12 mb-0">
                         <table  class="table table-hover border mb-0">
                             <thead  class="text-primary">
@@ -108,9 +124,6 @@
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Sale</th>
-                                    {{-- <th id="action_heading" colspan="2" class="text-center d-none">Action</th> --}}
-                                    {{-- <th id="actions_compress" colspan="2" class="text-center actions"><i class="fa-solid fa-compress"></i></th>
-                                    <th id="actions_expand" colspan="2" class="text-center actions"><i class="fa-solid fa-expand d-none"></i></th> --}}
                                 </tr>
                             </thead>
                         </table>
@@ -118,54 +131,12 @@
                     <div id="filter-sale-productt" class="col-md-12 mt-0">
                         <table  class="table table-hover border">
 
-                            <tbody id="filter-sale-product">
-                                <tr>
-                                  <td>1</td>
-                                  <td>Charger</td>
-                                  <td>350</td>
-                                  <td>1</td>
-                                  <td>Cart</td>
-                                </tr>
-                                <tr>
-                                  <td>1</td>
-                                  <td>Charger</td>
-                                  <td>350</td>
-                                  <td>1</td>
-                                  <td>Cart</td>
-                                </tr>
-                                <tr>
-                                  <td>1</td>
-                                  <td>Charger</td>
-                                  <td>350</td>
-                                  <td>1</td>
-                                  <td>Cart</td>
-                                </tr>
-                                <tr>
-                                  <td>1</td>
-                                  <td>Charger</td>
-                                  <td>350</td>
-                                  <td>1</td>
-                                  <td>Cart</td>
-                                </tr>
-                                <tr>
-                                  <td>1</td>
-                                  <td>Charger</td>
-                                  <td>350</td>
-                                  <td>1</td>
-                                  <td>Cart</td>
-                                </tr>
-                                <tr>
-                                  <td>1</td>
-                                  <td>Charger</td>
-                                  <td>350</td>
-                                  <td>1</td>
-                                  <td>Cart</td>
-                                </tr>
+                            <tbody id="sale_product_table">
                             </tbody>
                         </table>
 
                     </div>
-                </div>
+                </div> --}}
                 {{--==========> TABLE OF PRODUCT END <==========--}}
                 {{-- <hr> --}}
                 {{-- <button id="purchase_form_btn" type="submit" class="c-btn c-btn-primary pull-right">Enter</button> --}}
@@ -253,21 +224,18 @@
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table id="temp_table" class="table table-hover temp-table">
+                    <table id="cart_table" class="table table-hover temp-table">
                         <thead class="text-primary">
                             <tr>
                                 <th>S NO</th>
-                                <th>Product Name</th>
-                                <th>Product Code</th>
-                                <th>Purchase Price</th>
-                                <th>Sale Price</th>
-                                <th>Whole Sale Price</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th class="d-none" >Sale Price</th>
+                                <th class="d-none">Whole Sale Price</th>
                                 <th>Quantity</th>
-                                <th>category name</th>
-                                <th>category id</th>
-                                <th id="action_heading" colspan="2" class="text-center d-none">Action</th>
-                                {{-- <th id="actions_compress" colspan="2" class="text-center actions"><i class="fa-solid fa-compress"></i></th>
-                                <th id="actions_expand" colspan="2" class="text-center actions"><i class="fa-solid fa-expand d-none"></i></th> --}}
+                                <th class="d-none">category name</th>
+                                <th class="d-none" >category id</th>
+                                <th colspan="2" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>

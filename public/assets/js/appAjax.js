@@ -3,11 +3,13 @@ $(document).ready(function () {
     refresh_Temp_Product_table();
     refresh_Supplier_table();
     refresh_Customers_table();
+    loadProductIntoSaleTable();
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')}
     })
-
-// <====================>  PURCHASE PAGE <====================>
+// <================================================================>
+// <====================>  PURCHASE PAGE START <====================>
+// <================================================================>
 
     // ENTRY FORM OF PURCHASE
     $(this).on('click', '#purchase_form_btn', function (e) {
@@ -37,6 +39,9 @@ $(document).ready(function () {
                     $("#data_entry_form")[0].reset();
                     $('#save_alert').click();
                     resetForm()
+                    setTimeout(function() {
+                        $('.alert .close i').click()
+                    }, 1500);
                 }
                 else
                     alert('else wala error')
@@ -75,7 +80,6 @@ $(document).ready(function () {
                     resetForm()
             },
             error: function (response) {
-
                 alert('Ajax function Error...!!')
             }
 
@@ -200,10 +204,14 @@ $(document).ready(function () {
         })
     } // END
 
-    // <====================>  PURCHASE PAGE END  <====================>
+// <================================================================>
+// <=====================>  PURCHASE PAGE END <=====================>
+// <================================================================>
 
 
-    // <====================>  CUSTOMER PAGE <====================>
+// <================================================================>
+// <====================>  CUSTOMER PAGE START <====================>
+// <================================================================>
 
     $(this).on('submit', '#add_customer_form', function (event) {
         event.preventDefault()
@@ -259,8 +267,15 @@ $(document).ready(function () {
             }
         })//END OF AJAX
     }//END OF REFRESH
-    // <====================>  CUSTOMER PAGE END <====================>
-    // <====================>  SUPPLIER PAGE <====================>
+
+// <================================================================>
+// <=====================>  CUSTOMER PAGE END <=====================>
+// <================================================================>
+
+
+// <================================================================>
+// <====================>  SUPPLIER PAGE START <====================>
+// <================================================================>
 
     $(this).on('submit', '#add_supplier_form', function (event) {
         event.preventDefault()
@@ -317,22 +332,59 @@ $(document).ready(function () {
     }//END OF REFRESH
 
 
+// <================================================================>
+// <=====================>  SUPPLIER PAGE END <=====================>
+// <================================================================>
 
 
+// <================================================================>
+// <======================>  SALE PAGE START <======================>
+// <================================================================>
+
+    function loadProductIntoSaleTable(){
+        $.ajax({
+            type: 'GET',
+            url: 'sale/loadSaleTable',
+            success: function (response) {
+                // alert(response.status)
+                if (response.status == 200) {
+                    $('#sale_product_table').html('')
+                    $.each(response.products, function (key, item) {
+                        $('#sale_product_table').append('<tr>\
+                        <td>'+ (key + 1) + '</td>\
+                        <td>'+ item.product_name + '</td>\
+                        <td class="d-none">'+ item.p_code + '</td>\
+                        <td class="d-none">'+ item.p_price + '/-</td>\
+                        <td class="d-none">'+ item.ws_price + '/-</td>\
+                        <td>'+ item.s_price + '/-</td>\
+                        <td class="">'+ item.quantity + '</td>\
+                        <td class="d-none">'+ item.id + '</td>\
+                        <td class="d-none">'+ item.name + '</td>\
+                        <td class="d-none">'+ item.category_id + '</td>\
+                        <td><i class="fa-solid fa-cart-plus"></i></td>\
+                        <td class="temp_table_actions d-none">'+ '<button value="' + item.id + '" class="temp_delete_btn">\
+                        <i style = "font-size: 20px" class= "text-rose fa-solid fa-trash-can" ></i>\
+                        </button>'+ '</td >\
+                    </tr> ')
+                    })//END OF EACH
+                    // $('#action_heading').addClass('d-none');
+                    // $('#actions_expand i').addClass('d-none')
+                    // $('#actions_compress i').removeClass('d-none')
+                    // PriceTable()
+                }//END OF IF
+                else {
+                    $('#error_alert').click()
+                }
+            },//END OF SUCCESS
+            error: function (response) {
+                $('#error_alert').click()
+            }
+        })//END OF AJAX
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    // <====================>  SUPPLIER PAGE END  <====================>
+// <================================================================>
+// <======================>  SALE PAGE START <======================>
+// <================================================================>
 
 })//END OF READY

@@ -288,8 +288,6 @@ $(document).ready(function () {
 
     // END
 
-
-
     // TEMPORARY TABLE SEARCH
 
     // -----------------------------------
@@ -316,6 +314,40 @@ $(document).ready(function () {
 
     // END
 
+
+    // <================> SALE PAGE START <================>
+    $("#product_search_input").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#sale_product_table tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    // ADDING PRODUCT TO CART
+    $(this).on('click','#sale_product_table .fa-cart-plus',function(){
+        var $row      = $(this).closest('tr')
+        var $s_no     = $row.find("td:eq(0)").text()
+        var $name     = $row.find("td:eq(1)").text()
+        var $price    = $row.find("td:eq(5)").text()
+        var $quantity = $row.find("td:eq(6)").text()
+        // console.log($name)
+        $('#cart_table tbody').append('<tr>\
+         <td>'+$s_no+'</td>\
+         <td>'+$name+'</td>\
+         <td>'+$price+'</td>\
+         <td>'+$quantity+'</td>\
+         <td class="">'+"<i id='' style='font-size: 20px' class='text-info fa-solid fa-pen-to-square'></i>"+'</td>\
+         <td class="">'+"<i id='' style='font-size: 20px' class='text-rose fa-solid fa-trash-can'></i>"+'</td>\
+         </tr>')
+         $('#product_added_to_cart_alert').click();
+         setTimeout(function() {
+            $('.alert .close i').click()
+        }, 1500);
+    })//END
+
+
+
+    // <================> SALE PAGE END <================>
 
 
 
