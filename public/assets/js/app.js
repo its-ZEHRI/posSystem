@@ -227,8 +227,6 @@ $(document).ready(function () {
             $('#balance').val( $('#total_amount').val() )
     }else{
             var amount =  parseInt($('#total_amount').val()) - parseInt($(this).val())
-            console.log(parseInt($('#total_amount').val()))
-            console.log(parseInt($(this).val()))
             $('#net_amount').val(amount + '/-')
             $('#balance').val(amount + '/-')
         }
@@ -256,8 +254,6 @@ $(document).ready(function () {
             $('#balance').val( $('#net_amount').val() )
         else{
             var amount =  parseInt($('#net_amount').val()) - parseInt($(this).val())
-            console.log(parseInt($('#total_amount').val()))
-            console.log(parseInt($(this).val()))
             $('#balance').val(amount + '/-')
         }
     })
@@ -288,8 +284,6 @@ $(document).ready(function () {
 
     // END
 
-
-
     // TEMPORARY TABLE SEARCH
 
     // -----------------------------------
@@ -316,6 +310,74 @@ $(document).ready(function () {
 
     // END
 
+
+    // <================> SALE PAGE START <================>
+
+    // SEARCH THE PRODUCT IN SALE PRODUCT TABLE
+    $("#product_search_input").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#sale_product_table tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    // WHEN USER SELECT SUPPLIER
+    $(this).on('click', '.selected_category', function () {
+        // $('#temp_supplier_field').val($(this).children('span').text());
+        $('#customer_input').val($(this).children('span').text());
+    });
+
+    // REMOVE THE PRODUCT FORM CART
+    $(this).on('click','.cart_delete_btn',function(){
+        $(this).closest("tr").remove()
+        salePriceCard()
+    })
+
+    // ADDING PRODUCT TO CART
+    $(this).on('click','#sale_product_table .fa-cart-plus',function(){
+        var $row      = $(this).closest('tr')
+        var $s_no     = $row.find("td:eq(0)").text()
+        var $name     = $row.find("td:eq(1)").text()
+        var $price    = $row.find("td:eq(5)").text()
+        var $quantity = $row.find("td:eq(6)").text()
+        var $p_id = $row.find("td:eq(7)").text()
+        // console.log($name)
+        $('#cart_table tbody').append('<tr>\
+         <td class="product_id d-none">'+$p_id+'</td>\
+         <td>'+$s_no+'</td>\
+         <td class="text-left">'+$name+'</td>\
+         <td class="col_price">'+$price+'</td>\
+         <td class="col_quantity">'+1+'</td>\
+         <td class="temp_table_actions">'+ '<button value="' +$p_id+ '" class="cart_delete_btn">\
+         <i style = "font-size: 20px" class= "text-rose fa-solid fa-trash-can" ></i>\
+         </button>'+ '</td >\         </tr>')
+         $('#total_amount').val('0/-')
+         salePriceCard()
+         $('#product_added_to_cart_alert').click();
+         setTimeout(function() {
+             $('.alert .close i').click()
+            }, 1500);
+        })//END
+        // <td class="">'+"<i id='' style='font-size: 20px' class='text-info fa-solid fa-pen-to-square'></i>"+'</td>
+
+    // GETTING THE VALUES FROM CART TABLE FOR DISPLAY TO USER
+    function salePriceCard() {
+        $('#total_amount').val('0/-')
+        $('#net_amount').val('0/-')
+        $('#balance').val('0/-')
+        $('#cart_table tbody tr').each(function () {
+            var value = parseInt($(this).children('.col_price').text().slice(0, -2)) * parseInt($(this).children('.col_quantity').text())
+            var total = parseInt($('#total_amount').val().slice(0, -2))
+            var sub_total = value + total;
+            $('#total_amount').val(sub_total + "/-"); //
+            $('#net_amount').val(sub_total + "/-"); //
+            $('#balance').val(sub_total + "/-"); //
+        })
+    } // END
+
+
+
+    // <================> SALE PAGE END <================>
 
 
 

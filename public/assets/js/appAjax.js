@@ -3,11 +3,13 @@ $(document).ready(function () {
     refresh_Temp_Product_table();
     refresh_Supplier_table();
     refresh_Customers_table();
+    loadProductIntoSaleTable();
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')}
     })
-
-// <====================>  PURCHASE PAGE <====================>
+// <================================================================>
+// <====================>  PURCHASE PAGE START <====================>
+// <================================================================>
 
     // ENTRY FORM OF PURCHASE
     $(this).on('click', '#purchase_form_btn', function (e) {
@@ -37,6 +39,9 @@ $(document).ready(function () {
                     $("#data_entry_form")[0].reset();
                     $('#save_alert').click();
                     resetForm()
+                    setTimeout(function() {
+                        $('.alert .close i').click()
+                    }, 1500);
                 }
                 else
                     alert('else wala error')
@@ -75,7 +80,6 @@ $(document).ready(function () {
                     resetForm()
             },
             error: function (response) {
-
                 alert('Ajax function Error...!!')
             }
 
@@ -104,7 +108,6 @@ $(document).ready(function () {
     //  FORM OF PAYMENT CARD
     $(this).on('submit', '#purchase_payment_form', function (event) {
         event.preventDefault()
-        // var formData = new FormData(this);
         var formData = {
             'total_amount' : $('#total_amount').val().slice(0,-2),
             'discount' : $('#discount').val().slice(0,-2),
@@ -190,6 +193,9 @@ $(document).ready(function () {
 
     // GETTING THE VALUES FROM TABLE FOR DISPLAY TO USER
     function PriceTable() {
+        $('#total_amount').val("0/-"); //
+        $('#net_amount').val("0/-"); //
+        $('#balance').val("0/-"); //
         $('#temp_table tbody tr').each(function () {
             var value = parseInt($(this).children('.col_price').text().slice(0, -2)) * parseInt($(this).children('.col_quantity').text())
             var total = parseInt($('#total_amount').val().slice(0, -2))
@@ -200,10 +206,14 @@ $(document).ready(function () {
         })
     } // END
 
-    // <====================>  PURCHASE PAGE END  <====================>
+// <================================================================>
+// <=====================>  PURCHASE PAGE END <=====================>
+// <================================================================>
 
 
-    // <====================>  CUSTOMER PAGE <====================>
+// <================================================================>
+// <====================>  CUSTOMER PAGE START <====================>
+// <================================================================>
 
     $(this).on('submit', '#add_customer_form', function (event) {
         event.preventDefault()
@@ -259,8 +269,15 @@ $(document).ready(function () {
             }
         })//END OF AJAX
     }//END OF REFRESH
-    // <====================>  CUSTOMER PAGE END <====================>
-    // <====================>  SUPPLIER PAGE <====================>
+
+// <================================================================>
+// <=====================>  CUSTOMER PAGE END <=====================>
+// <================================================================>
+
+
+// <================================================================>
+// <====================>  SUPPLIER PAGE START <====================>
+// <================================================================>
 
     $(this).on('submit', '#add_supplier_form', function (event) {
         event.preventDefault()
@@ -317,22 +334,102 @@ $(document).ready(function () {
     }//END OF REFRESH
 
 
+// <================================================================>
+// <=====================>  SUPPLIER PAGE END <=====================>
+// <================================================================>
+
+
+// <================================================================>
+// <======================>  SALE PAGE START <======================>
+// <================================================================>
+
+    function loadProductIntoSaleTable(){
+        $.ajax({
+            type: 'GET',
+            url: 'sale/loadSaleTable',
+            success: function (response) {
+                if (response.status == 200) {
+                    $('#sale_product_table').html('')
+                    $.each(response.products, function (key, item) {
+                        $('#sale_product_table').append('<tr>\
+                        <td>'+ (key + 1) + '</td>\
+                        <td>'+ item.product_name + '</td>\
+                        <td class="d-none">'+ item.p_code + '</td>\
+                        <td class="d-none">'+ item.p_price + '/-</td>\
+                        <td class="d-none">'+ item.ws_price + '/-</td>\
+                        <td>'+ item.s_price + '/-</td>\
+                        <td class="">'+ item.quantity + '</td>\
+                        <td class="d-none">'+ item.id + '</td>\
+                        <td class="d-none">'+ item.name + '</td>\
+                        <td class="d-none">'+ item.category_id + '</td>\
+                        <td><i class="fa-solid fa-cart-plus"></i></td>\
+                        <td class="temp_table_actions d-none">'+ '<button value="' + item.id + '" class="temp_delete_btn">\
+                        <i style = "font-size: 20px" class= "text-rose fa-solid fa-trash-can" ></i>\
+                        </button>'+ '</td >\
+                    </tr> ')
+                    })//END OF EACH
+                }//END OF IF
+                else {
+                    $('#error_alert').click()
+                }
+            },//END OF SUCCESS
+            error: function (response) {
+                $('#error_alert').click()
+            }
+        })//END OF AJAX
+    }
+
+    //  FORM OF PAYMENT CARD
+    $(this).on('submit', '#sale_payment_form', function (event) {
+        event.preventDefault()
+        var products_ids = [];
+        var products_quantities = [];
+        $('#cart_table tbody tr').each(function(){
+            products_ids.push($(this).find('.product_id').text())
+            products_quantities.push($(this).find('.col_quantity').text())
+        })
+        // console.log(product_list);
+        var formData = {
+            'total_amount' : $('#total_amount').val().slice(0,-2),
+            'discount' : $('#discount').val().slice(0,-2),
+            'net_amount' : $('#net_amount').val().slice(0,-2),
+            'balance' : $('#balance').val().slice(0,-2),
+            'paid_amount' : $('#paid_amount').val().slice(0,-2),
+            'customer_id' : $('#customer_input').val(),
+            'products_ids' : products_ids,
+            'products_quantities' : products_quantities
+        }
+        // console.log(formData)
+        $.ajax({
+            type: 'POST',
+            url: '/sale/productSale',
+            data: formData,
+            success: function (response) {
+                if (response.status == 200)
+                    loadProductIntoSaleTable()
+                    $('#product_sale_alert').click();
+                    $('#cart_table tbody').html('')
+                    setTimeout(function() {
+                        $('.alert .close i').click()
+                    }, 1500);
+                    $('#total_amount').val('0/-')
+                    $('#discount').val('0/-')
+                    $('#net_amount').val('0/-')
+                    $('#balance').val('0/-')
+                    $('#paid_amount').val('0/-')
+            },
+            error: function (response) {
+                alert('Ajax function Error...!!')
+            }
+
+        }) // END OF AJAX
+    }) // END OF PAYMENT FORM
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    // <====================>  SUPPLIER PAGE END  <====================>
+// <================================================================>
+// <======================>  SALE PAGE END <======================>
+// <================================================================>
 
 })//END OF READY

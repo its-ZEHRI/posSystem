@@ -12,16 +12,17 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TempProductController;
 
 Auth::routes();
+Route::get('/', fn() =>  view('home') );
 
 Route::group(['middleware'=>['auth']],function(){
-    Route::get('/dashboard',        [DashboardController::class,   'index'  ]);
-    Route::get('/purchase',         [PurchaseController::class,    'index'  ]);
-    Route::get('/supplier',         [SupplierController::class,    'index'  ]);
-    Route::get('/customer',         [CustomerController::class,    'index'  ]);
-    Route::get('/refreshPurchase',  [TempProductController::class, 'refresh']);
-    Route::get('/refreshSupplier',  [SupplierController::class,    'refresh']);
-    Route::get('/refreshCustomer',  [CustomerController::class,   'refresh']);
-    Route::get('/inventory',        [InventoryController::class,   'index'  ]);
+    Route::get('/dashboard',            [DashboardController::class,   'index'  ]);
+    Route::get('/purchase',             [PurchaseController::class,    'index'  ]);
+    Route::get('/supplier',             [SupplierController::class,    'index'  ]);
+    Route::get('/customer',             [CustomerController::class,    'index'  ]);
+    Route::get('/refreshPurchase',      [TempProductController::class, 'refresh']);
+    Route::get('/refreshSupplier',      [SupplierController::class,    'refresh']);
+    Route::get('/refreshCustomer',      [CustomerController::class,    'refresh']);
+    Route::get('/inventory',            [InventoryController::class,   'index'  ]);
 
     Route::group(['prefix'=>'/purchase'],function(){
         Route::post('/tempCreateData',  [TempProductController::class, 'tempCreate' ]);
@@ -31,29 +32,29 @@ Route::group(['middleware'=>['auth']],function(){
     });
 
     Route::group(['prefix' => '/supplier'],function(){
-        Route::post('/createSupplier',  [SupplierController::class, 'create' ]);
+        Route::post('/createSupplier',  [SupplierController::class,        'create' ]);
     });
 
     Route::group(['prefix' => '/customer'],function(){
-        Route::post('/createCustomer',  [CustomerController::class, 'store' ]);
-
+        Route::post('/createCustomer',  [CustomerController::class,         'store' ]);
 
     });
 
     Route::group(['prefix'=> '/setting'],function(){
         Route::post('/createCategory',  [CategoryController::class, 'createCategory']);
+        Route::get('/',                 [CategoryController::class,          'index']);
     });
 
-    Route::get('setting', [CategoryController::class, 'index']);
 
+    Route::group(['prefix'=> '/sale'],function(){
+        Route::get('/',                 [SaleController::class,             'index' ]);
+        Route::get('/loadSaleTable',    [SaleController::class,     'loadSaleTable' ]);
+        Route::post('/productSale',     [SaleController::class,         'saleProduct' ])->name('productSale');
+    });
 
-    Route::get('sale', [SaleController::class, 'index']);
 
 });// END OF AUTH MIDDLEWARE
 
-Route::get('/', function () {
-    return view('home');
-});
 
 
 

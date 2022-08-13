@@ -62,7 +62,7 @@
                                 <th>Sale Price</th>
                                 <th>Whole Sale Price</th>
                                 <th>Quantity</th>
-                                <th>Supplier</th>
+                                {{-- <th>Supplier</th> --}}
                                 {{-- <th colspan="2" class="text-center">Actions</th> --}}
                             </tr>
                         </thead>

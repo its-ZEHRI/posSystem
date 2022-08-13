@@ -123,12 +123,12 @@ html{
     justify-content: space-between;
     align-items: center;
 }
-.temp_delete_btn{
+.temp_delete_btn, .cart_delete_btn{
     outline: none;
     border: 0;
     cursor: pointer;
 }
-.temp_delete_btn:focus{
+.temp_delete_btn:focus, .cart_delete_btn:focus{
     outline: none;
 }
 .payment-card-field{
@@ -160,12 +160,29 @@ html{
 
 /* SALE PAGE START */
 
-#filter-sale-productt{
-    /* margin-top: 50px; */
-    /* width: 50px!important; */
-    height: 12.3rem!important;
+#sale_product_table{
+    height: 9.8rem!important;
+    display: block;
     overflow-y: scroll;
 }
+#sale_product_table tr , #sale_page_product_table thead{
+    width: 100%;
+    display: table;
+    table-layout: fixed!important;
+}
+
+
+#sale_product_table i{
+    color: var(--violet-color);
+    font-size: 24px;
+    cursor: pointer;
+}
+#sale_product_table i:hover{
+    transform: scale(1.1);
+}
+
+
+
 /* SALE PAGE END */
 
 /**

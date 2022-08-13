@@ -26,6 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
+    // if(AUTH::)
     protected $redirectTo = RouteServiceProvider::DASHBOARD;
 
     /**
