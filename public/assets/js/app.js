@@ -345,7 +345,7 @@ $(document).ready(function () {
         $('#cart_table tbody').append('<tr>\
          <td class="product_id d-none">'+$p_id+'</td>\
          <td>'+$s_no+'</td>\
-         <td>'+$name+'</td>\
+         <td class="text-left">'+$name+'</td>\
          <td class="col_price">'+$price+'</td>\
          <td class="col_quantity">'+1+'</td>\
          <td class="temp_table_actions">'+ '<button value="' +$p_id+ '" class="cart_delete_btn">\

@@ -206,8 +206,8 @@
                             <table id="cart_table" class="table table-hover temp-table">
                                 <thead class="text-primary">
                                     <tr>
-                                        <th>S NO</th>
-                                        <th>Product</th>
+                                        <th class="text-left">S NO</th>
+                                        <th class="text-left">Product</th>
                                         <th>Price</th>
                                         <th class="d-none">Sale Price</th>
                                         <th class="d-none">Whole Sale Price</th>
