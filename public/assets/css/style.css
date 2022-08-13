@@ -123,12 +123,12 @@ html{
     justify-content: space-between;
     align-items: center;
 }
-.temp_delete_btn{
+.temp_delete_btn, .cart_delete_btn{
     outline: none;
     border: 0;
     cursor: pointer;
 }
-.temp_delete_btn:focus{
+.temp_delete_btn:focus, .cart_delete_btn:focus{
     outline: none;
 }
 .payment-card-field{

@@ -108,7 +108,6 @@ $(document).ready(function () {
     //  FORM OF PAYMENT CARD
     $(this).on('submit', '#purchase_payment_form', function (event) {
         event.preventDefault()
-        // var formData = new FormData(this);
         var formData = {
             'total_amount' : $('#total_amount').val().slice(0,-2),
             'discount' : $('#discount').val().slice(0,-2),
@@ -194,6 +193,9 @@ $(document).ready(function () {
 
     // GETTING THE VALUES FROM TABLE FOR DISPLAY TO USER
     function PriceTable() {
+        $('#total_amount').val("0/-"); //
+        $('#net_amount').val("0/-"); //
+        $('#balance').val("0/-"); //
         $('#temp_table tbody tr').each(function () {
             var value = parseInt($(this).children('.col_price').text().slice(0, -2)) * parseInt($(this).children('.col_quantity').text())
             var total = parseInt($('#total_amount').val().slice(0, -2))
@@ -346,7 +348,6 @@ $(document).ready(function () {
             type: 'GET',
             url: 'sale/loadSaleTable',
             success: function (response) {
-                // alert(response.status)
                 if (response.status == 200) {
                     $('#sale_product_table').html('')
                     $.each(response.products, function (key, item) {
@@ -367,10 +368,6 @@ $(document).ready(function () {
                         </button>'+ '</td >\
                     </tr> ')
                     })//END OF EACH
-                    // $('#action_heading').addClass('d-none');
-                    // $('#actions_expand i').addClass('d-none')
-                    // $('#actions_compress i').removeClass('d-none')
-                    // PriceTable()
                 }//END OF IF
                 else {
                     $('#error_alert').click()
@@ -382,9 +379,57 @@ $(document).ready(function () {
         })//END OF AJAX
     }
 
+    //  FORM OF PAYMENT CARD
+    $(this).on('submit', '#sale_payment_form', function (event) {
+        event.preventDefault()
+        var products_ids = [];
+        var products_quantities = [];
+        $('#cart_table tbody tr').each(function(){
+            products_ids.push($(this).find('.product_id').text())
+            products_quantities.push($(this).find('.col_quantity').text())
+        })
+        // console.log(product_list);
+        var formData = {
+            'total_amount' : $('#total_amount').val().slice(0,-2),
+            'discount' : $('#discount').val().slice(0,-2),
+            'net_amount' : $('#net_amount').val().slice(0,-2),
+            'balance' : $('#balance').val().slice(0,-2),
+            'paid_amount' : $('#paid_amount').val().slice(0,-2),
+            'customer_id' : $('#customer_input').val(),
+            'products_ids' : products_ids,
+            'products_quantities' : products_quantities
+        }
+        // console.log(formData)
+        $.ajax({
+            type: 'POST',
+            url: '/sale/productSale',
+            data: formData,
+            success: function (response) {
+                if (response.status == 200)
+                    loadProductIntoSaleTable()
+                    $('#product_sale_alert').click();
+                    $('#cart_table tbody').html('')
+                    setTimeout(function() {
+                        $('.alert .close i').click()
+                    }, 1500);
+                    $('#total_amount').val('0/-')
+                    $('#discount').val('0/-')
+                    $('#net_amount').val('0/-')
+                    $('#balance').val('0/-')
+                    $('#paid_amount').val('0/-')
+            },
+            error: function (response) {
+                alert('Ajax function Error...!!')
+            }
+
+        }) // END OF AJAX
+    }) // END OF PAYMENT FORM
+
+
+
 
 // <================================================================>
-// <======================>  SALE PAGE START <======================>
+// <======================>  SALE PAGE END <======================>
 // <================================================================>
 
 })//END OF READY
