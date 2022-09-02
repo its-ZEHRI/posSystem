@@ -54,10 +54,10 @@
                         <p>Settings</p>
                     </a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="./map.html">
-                        <i class="material-icons">location_ons</i>
-                        <p>Maps</p>
+                <li class="nav-item {{request()->path() == 'reports' ? 'active' : ''}}">
+                    <a class="nav-link" href="/reports">
+                        <i class="material-icons">reports</i>
+                        <p>Reports</p>
                     </a>
                 </li>
                 <li class="nav-item ">

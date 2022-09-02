@@ -46,16 +46,13 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-
         $request['user_id'] = Auth::User()->id;
-        // dd($request->all());
-        $values = Purchase::Create($request->all());
+        $purchase = Purchase::create($request->all());
 
-        $user = Auth::User()->id;
+        $user = Auth::User();
         $products = $user->temp_products;
-
         foreach ($products as $product) {
-            $product['purchase_id'] = $values->id;
+            $product['purchase_id'] = $purchase->id;
             Product::create($product->toArray());
         }
         TempProduct::where('user_id', $user->id)->delete();

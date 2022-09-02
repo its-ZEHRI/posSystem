@@ -110,20 +110,19 @@ $(document).ready(function () {
         event.preventDefault()
         var formData = {
             'total_amount' : $('#total_amount').val().slice(0,-2),
-            'discount' : $('#discount').val().slice(0,-2),
-            'net_amount' : $('#net_amount').val().slice(0,-2),
-            'balance' : $('#balance').val().slice(0,-2),
-            'paid_amount' : $('#paid_amount').val().slice(0,-2),
-            'supplier_id' : $('#supplier_input').val()
+            'discount'     : $('#discount').val().slice(0,-2),
+            'net_amount'   : $('#net_amount').val().slice(0,-2),
+            'balance'      : $('#balance').val().slice(0,-2),
+            'paid_amount'  : $('#paid_amount').val().slice(0,-2),
+            'supplier_id'  : $('#supplier_input').val()
         }
-        console.log(formData)
         $.ajax({
             type: 'POST',
             url: '/purchase/productStore',
             data: formData,
             success: function (response) {
                 if (response.status == 200)
-                    // alert(response.message)
+                    console.log(response.data)
                     $('#purchase_alert').click();
                     refresh_Temp_Product_table()
                     $('#discount').val('0/-')
@@ -146,7 +145,6 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status == 200) {
                     $('#temp_table tbody').html('')
-                    // $("#total_amount").removeClass('disabled')
                     $('#total_amount').val('0/-')
                     $.each(response.products, function (key, item) {
                         $('#temp_table').append('<tr>\

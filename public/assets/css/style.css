@@ -181,9 +181,37 @@ html{
     transform: scale(1.1);
 }
 
-
-
 /* SALE PAGE END */
+
+/* Report page start */
+
+.purchase-summary-report .report-wrapper div,
+.sale-summary-report .report-wrapper div
+{
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 1rem;
+}
+.purchase-summary-report p,
+.sale-summary-report p
+{
+    font-size: 20px;
+    font-weight: normal;
+    color: var(--violet-color);
+}
+.purchase-summary-report div h6:first-child,
+.sale-summary-report div h6:first-child
+{
+    font-size: 14px;
+    color: rgba(0,0,0,0.6);
+}
+.purchase-summary-report div h6:last-child,
+.sale-summary-report div h6:last-child
+{
+    font-size: 16px;
+}
+
+/* Report page end */
 
 /**
 * Template Name: Scaffold - v4.7.0
