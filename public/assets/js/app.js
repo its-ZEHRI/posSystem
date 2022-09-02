@@ -8,18 +8,11 @@ $(document).ready(function () {
     $('#supplier_card + div').removeClass('d-none');
     // END
 
-    if ($('#email').val() == '') {
-    }
-    else {
-        $('#email').addClass('is-focused is-filled')
-    }
+    if ($('#email').val() == '') {}
+    else $('#email').addClass('is-focused is-filled')
 
-    if ($('#password').val() == '') {
-    }
-    else {
-        $('#password').addClass('is-focused is-filled')
-    }
-
+    if ($('#password').val() == '') {}
+    else $('#password').addClass('is-focused is-filled')
 
     // FIXED FLUGIN
     $(this).on('click', '#purple', function () {
@@ -222,10 +215,11 @@ $(document).ready(function () {
     })
 
     $(this).on('keyup','#discount',function(){
-        if($(this).val() == '')
-            {$('#net_amount').val( $('#total_amount').val() )
+        if($(this).val() == ''){
+            $('#net_amount').val( $('#total_amount').val() )
             $('#balance').val( $('#total_amount').val() )
-    }else{
+        }
+        else{
             var amount =  parseInt($('#total_amount').val()) - parseInt($(this).val())
             $('#net_amount').val(amount + '/-')
             $('#balance').val(amount + '/-')
@@ -238,7 +232,6 @@ $(document).ready(function () {
         else
             $(this).val( $(this).val() + '/-')
     })
-
 
     // ---------------------------------
 
@@ -272,16 +265,12 @@ $(document).ready(function () {
         var paid     = parseInt( $('#paid_amount').val().slice(0,-2))
         var total = discount + balance + paid
         if(parseInt($('#total_amount').val().slice(0,-2)) == total)
-        {
             console.log('ys')
-        }
-        else
-        {
+        else{
             console.log('no')
             console.log(total)
         }
     }
-
     // END
 
     // TEMPORARY TABLE SEARCH
@@ -342,7 +331,7 @@ $(document).ready(function () {
         var $quantity = $row.find("td:eq(6)").text()
         var $p_id = $row.find("td:eq(7)").text()
         // console.log($name)
-        $('#cart_table tbody').append('<tr>\
+        $('#cart_table tbody').prepend('<tr>\
          <td class="product_id d-none">'+$p_id+'</td>\
          <td>'+$s_no+'</td>\
          <td class="text-left">'+$name+'</td>\
@@ -378,7 +367,5 @@ $(document).ready(function () {
 
 
     // <================> SALE PAGE END <================>
-
-
 
 }); //END OF READY

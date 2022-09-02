@@ -7,7 +7,7 @@
         <x-layoutUtilities.header>
         </x-layoutUtilities.header>
     </x-slot>
-    {{-- ***** SLOT START ***** --}}
+    <!--<==========> SLOT START <==========>-->
     @if (Session::has('success'))
         <div class="">
             <button id="btn2" class="d-none"
@@ -21,24 +21,22 @@
         </script>
     @endif
 
-    {{-- ==========> ALERTS <========== --}}
+    <!-- <==========> ALERTS <==========> -->
     <div id="alert">
         <button id="product_added_to_cart_alert" class="d-none"
             onclick="md.showNotification('top','center','Product Added to Cart...!','info')"></button>
         <button id="product_sale_alert" class="d-none"
             onclick="md.showNotification('top','center','<h4>Products Sale...!</h4>','success')"></button>
-
     </div>
-    {{-- ==========> ALERTS <========== --}}
+    <!-- <==========> ALERTS <==========> -->
 
-
-    {{-- ==========> SALE CARD <========== --}}
+    <!-- <==========> SALE CARD <==========> -->
     <div class="container-fluid">
         <div class="row" id="">
             <div class="col-md-8">
                 <x-utilities.banner title="Sale Products" date="{{ now()->format('d/m/y ') }}" subtitle="">
                     <div class="row">
-                        {{-- <====> CUSTOMER DROPDOWN <=====> --}}
+                        <!-- <=======> CUSTOMER DROPDOWN <=======> -->
                         <div class="col-md-4">
                             <div style=" @error('category_id') {{ 'border-bottom: 4px solid red' }} @enderror">
                                 <div class="card card-plain mb-0 mt-4 p-0" style="position: relative">
@@ -101,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- ==========> TABLE OF PRODUCT <========== -->
+                    <!-- <==========> TABLE OF PRODUCT <==========> -->
                     <div class="row">
                         <div class="col-md-12 mt-1">
                             <table id="sale_page_product_table" class="table table-hover border">
@@ -134,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- end setting of product --}}
+                <!-- end setting of product -->
                 <div class="card card-profile">
                     <div class="card-body payment-card">
                         <h3 class="card-title m-0 text-left text-primary ">Payment</h3>
@@ -179,7 +177,7 @@
         </div>
     </div>
 
-    <!-- ==========> CART <========== -->
+    <!-- <==========> CART <==========> -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -227,7 +225,7 @@
         </div>
     </div>
     <div class="container-fluid">
-        {{-- *****  SLOT END  ****** --}}
+        <!-- <=======>  SLOT END  <=======> -->
         <x-slot name="footer">
             <x-layoutUtilities.footer>
             </x-layoutUtilities.footer>

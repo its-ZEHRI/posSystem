@@ -25,7 +25,7 @@ class CreateTempProductsTable extends Migration
             $table->string('category_id');
             $table->string('supplier_id');
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained('users','id');
             $table->timestamps();
         });
     }
