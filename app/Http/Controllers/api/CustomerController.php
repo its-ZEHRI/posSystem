@@ -50,7 +50,7 @@ class CustomerController extends Controller
             $data = Sale::where(['customer_id' => $customer->id, 'user_id' => $request->id])->get();
             return SuccessResponse($data);
         }else{
-            return ErrorResponse('Invalid credentials');
+            return ErrorResponse('Invalid credentials.');
         }
     }
 
