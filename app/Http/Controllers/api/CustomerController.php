@@ -65,9 +65,9 @@ class CustomerController extends Controller
         $invoice = Sale::find($request->id);
 
         if($invoice){
-            $data = Sale::with('soldProduct','soldProduct.products:id,product_name,s_price')
+            $data = Sale::with('soldProduct','soldProduct.products')
                         ->where('id',$request->id)->first();
-            return SuccessResponse($data);
+            return SuccessResponse('jkhkjh');
         }else{
             return ErrorResponse('Invalid credentials');
         }
