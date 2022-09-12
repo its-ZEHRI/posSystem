@@ -56,7 +56,6 @@ class CustomerController extends Controller
 
     public function get_single_invoice(Request $request){
         $validator = Validator($request->all(),[
-            'email' => 'required|email',
             'id' => 'required'  // sale id
         ]);
 
