@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\TempProduct;
 
 class User extends Authenticatable
 {
@@ -41,20 +42,27 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'Total_amount' => 'integer',
     ];
     public function temp_products(){
-        return $this->hasMany('App\Models\TempProduct');
+        return $this->hasMany(TempProduct::class,'user_id','id');
     }
     public function products(){
         return $this->hasMany(Product::class);
     }
     public function categories(){
-        return $this->hasMany('App\Models\Category');
+        return $this->hasMany(Category::class);
     }
     public function Suppliers(){
-        return $this->hasMany('App\Models\Supplier');
+        return $this->hasMany(Supplier::class);
     }
     public function Customers(){
         return $this->hasMany(Customer::class);
+    }
+    public function purchases(){
+        return $this->hasMany(Purchase::class);
+    }
+    public function sales(){
+        return $this->hasMany(Sale::class);
     }
 }

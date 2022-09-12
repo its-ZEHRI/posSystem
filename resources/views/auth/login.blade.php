@@ -25,8 +25,8 @@
   <div class="content">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 order-md-2">
-          <img src="images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
+        <div class="col-md-6 text-center order-md-2">
+          <img src="{{ asset('assets/images/imac1.png') }}" alt="Image" width="80%" class="img-fluid">
         </div>
         <div class="col-md-6 contents">
           <div class="row justify-content-center">

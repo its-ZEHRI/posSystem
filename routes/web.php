@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TempProductController;
@@ -23,6 +24,7 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('/refreshSupplier',      [SupplierController::class,    'refresh']);
     Route::get('/refreshCustomer',      [CustomerController::class,    'refresh']);
     Route::get('/inventory',            [InventoryController::class,   'index'  ]);
+    Route::get('/view-report/{id}',     [ReportsController::class,     'viewReport'  ]);
 
     Route::group(['prefix'=>'/purchase'],function(){
         Route::post('/tempCreateData',  [TempProductController::class, 'tempCreate' ]);
@@ -41,8 +43,14 @@ Route::group(['middleware'=>['auth']],function(){
     });
 
     Route::group(['prefix'=> '/setting'],function(){
-        Route::post('/createCategory',  [CategoryController::class, 'createCategory']);
         Route::get('/',                 [CategoryController::class,          'index']);
+        Route::post('/createCategory',  [CategoryController::class, 'createCategory']);
+    });
+
+    Route::group(['prefix'=> '/reports'],function(){
+        Route::get('/',                 [ReportsController::class,          'index']);
+        Route::post('/createCategory',  [CategoryController::class, 'createCategory']);
+
     });
 
 
