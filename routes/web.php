@@ -53,11 +53,13 @@ Route::group(['middleware'=>['auth']],function(){
 
     });
 
+
     Route::group(['prefix'=> '/sale'],function(){
         Route::get('/',                 [SaleController::class,             'index' ]);
         Route::get('/loadSaleTable',    [SaleController::class,     'loadSaleTable' ]);
         Route::post('/productSale',     [SaleController::class,         'saleProduct' ])->name('productSale');
     });
+
 
 });// END OF AUTH MIDDLEWARE
 

@@ -42,6 +42,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'Total_amount' => 'integer',
     ];
     public function temp_products(){
         return $this->hasMany(TempProduct::class,'user_id','id');

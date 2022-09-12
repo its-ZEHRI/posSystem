@@ -15,10 +15,14 @@ class Sale extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function getCreatedAtAttribute($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
+
+    public function soldProduct(){
+        return $this->hasMany(SoldProduct::class,'sale_id','id');
     }
+    // public function getCreatedAtAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
+    // }
 
 
 }
