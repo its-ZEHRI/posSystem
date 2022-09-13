@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SoldProduct;
@@ -48,7 +49,6 @@ class SaleController extends Controller
             'status' => 200,
             'message' => 'success',
         ]);
-
 
     }
 }

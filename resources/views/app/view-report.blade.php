@@ -22,7 +22,7 @@
                                     <tr>
                                         <th>S-NO</th>
                                         {{-- <th>Invoice</th> --}}
-                                        <th>Total Amount</th>
+                                        <th>Product name</th>
                                         <th>Net Amount</th>
                                         <th>Balance</th></th>
                                         <th>Paid Amount</th>

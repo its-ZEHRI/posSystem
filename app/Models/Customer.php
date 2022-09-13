@@ -16,4 +16,8 @@ class Customer extends Model
         'contact'
     ];
 
+    public function sale(){
+        
+    }
+
 }

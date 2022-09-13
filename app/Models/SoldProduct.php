@@ -9,7 +9,12 @@ class SoldProduct extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+
+    protected $hidden = [
+        'created_at','updated_at'
+    ];
     public function products(){
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class,'product_id','id');
     }
 }

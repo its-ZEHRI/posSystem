@@ -119,6 +119,7 @@
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                     <div class="clearfix"></div>
                 </x-utilities.banner>

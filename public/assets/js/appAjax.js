@@ -34,7 +34,7 @@ $(document).ready(function () {
         $("#data_entry_form")[0].reset();
         $.ajax({
             type     : 'POST',
-            url      : '/purchase/tempCreateData',
+            url      : `/purchase/tempCreateData`,
             dataType : 'json',
             data     : data,
             success: function (response) {
@@ -74,7 +74,7 @@ $(document).ready(function () {
         }
         $.ajax({
             type: 'POST',
-            url: '/purchase/tempUpdateData',
+            url: `/purchase/tempUpdateData`,
             data: FormData,
             success: function (response) {
                 if (response.status == 200)
@@ -97,7 +97,7 @@ $(document).ready(function () {
         // alert(id)
         $.ajax({
             type: 'GET',
-            url: '/purchase/destroy/' + id,
+            url: `/purchase/destroy/${id}`,
             success: function (response) {
                 if (response.status == 400) {
                     alert(response.message)
@@ -131,7 +131,7 @@ $(document).ready(function () {
         }
         $.ajax({
             type: 'POST',
-            url: '/purchase/productStore',
+            url: `/purchase/productStore`,
             data: formData,
             success: function (response) {
                 if (response.status == 200)
@@ -157,7 +157,7 @@ $(document).ready(function () {
         // alert($('#url').text())
         $.ajax({
             type: 'GET',
-            url:  '/refreshPurchase',
+            url: `/refreshPurchase`,
             success: function (response) {
                 if (response.status == 200) {
                     $('#temp_table tbody').html('')
@@ -239,7 +239,7 @@ $(document).ready(function () {
         }
         $.ajax({
             type : 'POST',
-            url  : '/customer/createCustomer',
+            url  : `/customer/createCustomer`,
             data: formdata,
             success: function (response) {
                 if (response.status == 200) {
@@ -259,7 +259,7 @@ $(document).ready(function () {
     function refresh_Customers_table() {
         $.ajax({
             type: 'GET',
-            url:'/refreshCustomer',
+            url: `/refreshCustomer`,
             success: function (response) {
                 if (response.status == 200) {
                     $('#customer_table tbody').html('')
@@ -302,7 +302,7 @@ $(document).ready(function () {
         }
         $.ajax({
             type : 'POST',
-            url  : 'supplier/createSupplier',
+            url  : `supplier/createSupplier`,
             data: formdata,
             success: function (response) {
                 if (response.status == 200) {
@@ -323,7 +323,7 @@ $(document).ready(function () {
     function refresh_Supplier_table() {
         $.ajax({
             type: 'GET',
-            url: '/refreshSupplier',
+            url: `/refreshSupplier`,
             success: function (response) {
                 if (response.status == 200) {
                     $('#supplier_table tbody').html('')
@@ -360,7 +360,7 @@ $(document).ready(function () {
     function loadProductIntoSaleTable(){
         $.ajax({
             type: 'GET',
-            url: 'sale/loadSaleTable',
+            url: `sale/loadSaleTable`,
             success: function (response) {
                 if (response.status == 200) {
                     $('#sale_product_table').html('')
@@ -423,7 +423,7 @@ $(document).ready(function () {
         // console.log(formData)
         $.ajax({
             type: 'POST',
-            url: '/sale/productSale',
+            url: `/sale/productSale`,
             data: formData,
             success: function (response) {
                 if (response.status == 200)
