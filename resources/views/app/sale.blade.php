@@ -27,6 +27,9 @@
             onclick="md.showNotification('top','center','Product Added to Cart...!','info')"></button>
         <button id="product_sale_alert" class="d-none"
             onclick="md.showNotification('top','center','<h4>Products Sale...!</h4>','success')"></button>
+        <button id="msg_alert" class="d-none"
+            onclick="md.showNotification('top','center','<h4>Cart is Empty...!</h4>','info')"></button>
+
     </div>
     <!-- <==========> ALERTS <==========> -->
 
@@ -107,9 +110,9 @@
                                     <tr>
                                         <th>S NO</th>
                                         <th>Product Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Sale</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th>Add to Cart</th>
                                     </tr>
                                 </thead>
                                 <tbody id="sale_product_table">
@@ -125,10 +128,10 @@
                 <!-- setting of product -->
                 <div class="card card-profile">
                     <div class="card-body payment-card">
-                        <h3 class="card-title m-0 text-left text-primary ">Setting</h3>
+                        <h3 class="card-title m-0 text-left text-primary">Preferences</h3>
                         <hr class="m-0">
                         <div class="px-4 mt-3">
-                            whatever
+                            working on this
                         </div>
                     </div>
                 </div>

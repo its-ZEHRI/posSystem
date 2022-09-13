@@ -14,7 +14,13 @@ $(document).ready(function () {
     // ENTRY FORM OF PURCHASE
     $(this).on('click', '#purchase_form_btn', function (e) {
         e.preventDefault();
-        // var formdata = new FormData(this);
+        if($('#temp_category_field').val() == 0){
+            $('#msg_alert').click();
+            setTimeout(function() {
+                $('.alert .close i').click()
+            }, 1500);
+            return
+        }
         var data = {
             'product_name': $('#temp_p_name_field').val(),
             'p_code'      : $('#temp_p_code_field').val(),
@@ -108,6 +114,13 @@ $(document).ready(function () {
     //  FORM OF PAYMENT CARD
     $(this).on('submit', '#purchase_payment_form', function (event) {
         event.preventDefault()
+        if($('#supplier_input').val() == 0){
+            $('#payment_card_alert').click()
+            setTimeout(function() {
+                $('.alert .close i').click()
+            }, 1500);
+            return
+        }
         var formData = {
             'total_amount' : $('#total_amount').val().slice(0,-2),
             'discount'     : $('#discount').val().slice(0,-2),
@@ -124,6 +137,9 @@ $(document).ready(function () {
                 if (response.status == 200)
                     console.log(response.data)
                     $('#purchase_alert').click();
+                    setTimeout(function() {
+                        $('.alert .close i').click()
+                    }, 2000);
                     refresh_Temp_Product_table()
                     $('#discount').val('0/-')
                     $('#net_amount').val('0/-')
@@ -137,11 +153,11 @@ $(document).ready(function () {
         }) // END OF AJAX
     }) // END OF PAYMENT FORM
 
-
     function refresh_Temp_Product_table(e) {
+        // alert($('#url').text())
         $.ajax({
             type: 'GET',
-            url: '/refreshPurchase',
+            url:  '/refreshPurchase',
             success: function (response) {
                 if (response.status == 200) {
                     $('#temp_table tbody').html('')
@@ -243,7 +259,7 @@ $(document).ready(function () {
     function refresh_Customers_table() {
         $.ajax({
             type: 'GET',
-            url: '/refreshCustomer',
+            url:'/refreshCustomer',
             success: function (response) {
                 if (response.status == 200) {
                     $('#customer_table tbody').html('')
@@ -355,12 +371,12 @@ $(document).ready(function () {
                         <td class="d-none">'+ item.p_code + '</td>\
                         <td class="d-none">'+ item.p_price + '/-</td>\
                         <td class="d-none">'+ item.ws_price + '/-</td>\
-                        <td>'+ item.s_price + '/-</td>\
-                        <td class="">'+ item.quantity + '</td>\
+                        <td class="text-center">'+ item.s_price + '/-</td>\
+                        <td class="text-center">'+ item.quantity + '</td>\
                         <td class="d-none">'+ item.id + '</td>\
                         <td class="d-none">'+ item.name + '</td>\
                         <td class="d-none">'+ item.category_id + '</td>\
-                        <td><i class="fa-solid fa-cart-plus"></i></td>\
+                        <td class="text-center"><i class="fa-solid fa-cart-plus"></i></td>\
                         <td class="temp_table_actions d-none">'+ '<button value="' + item.id + '" class="temp_delete_btn">\
                         <i style = "font-size: 20px" class= "text-rose fa-solid fa-trash-can" ></i>\
                         </button>'+ '</td >\
@@ -386,6 +402,13 @@ $(document).ready(function () {
             products_ids.push($(this).find('.product_id').text())
             products_quantities.push($(this).find('.col_quantity').text())
         })
+        if(products_quantities == ''){
+            $('#msg_alert').click()
+            setTimeout(function() {
+                $('.alert .close i').click()
+            }, 1500);
+            return
+        }
         // console.log(product_list);
         var formData = {
             'total_amount' : $('#total_amount').val().slice(0,-2),
