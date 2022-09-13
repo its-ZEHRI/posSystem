@@ -147,8 +147,9 @@
                                 <input id="customer_input" type="hidden" name="customer_id" value="0">
                                 <div class="payment-card-field">
                                     <p class="m-0">Total Amount</p>
-                                    <input type="text" id="total_amount" class="form-control disabled text-primary"
-                                        name="total_amount" value="0/-">
+                                    <input type="text" id="total_amount"
+                                        class="form-control disabled text-primary" name="total_amount"
+                                        value="0/-">
                                 </div>
                                 <div class="payment-card-field">
                                     <p class="m-0">Discount</p>
