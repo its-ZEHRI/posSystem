@@ -70,6 +70,8 @@
 
 
               <input type="submit" value="Log In" class="btn text-white btn-block btn-primary">
+              <a href="/register" style="text-decoration: none"><span class="d-block text-right my-2 text-muted">Sign up</span></a>
+
 
               <span class="d-block text-left my-4 text-muted"> or sign in with</span>
 

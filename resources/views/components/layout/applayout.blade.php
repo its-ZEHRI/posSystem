@@ -51,7 +51,7 @@
             </div>
         </div>
         @unless ($nofixedplugin)
-            {{$fixed_plugin}}
+            <!-- {{$fixed_plugin}} -->
         @endunless
     @else
         <div class="login-page">
@@ -60,7 +60,7 @@
             {{-- </div> --}}
         </div>
     @endif
-
+    <span id="url" class="d-none">{{ ENV('APP_URL') }}</span>
     <!--   Core JS Files   -->
     <script src="{{asset('js/core/jquery.min.js')}}"></script>
     <script src="{{asset('js/core/popper.min.js')}}"></script>

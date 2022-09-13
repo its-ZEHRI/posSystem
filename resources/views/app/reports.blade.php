@@ -81,7 +81,7 @@
                                         <th>Balance</th></th>
                                         <th>Paid Amount</th>
                                         <th>Date</th>
-                                        <th>Details</th>
+                                        {{-- <th>Details</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,7 +94,7 @@
                                         <td>{{ $sale->balance }}/-</td>
                                         <td>{{ $sale->paid_amount }}/-</td>
                                         <td>{{ $sale->created_at }}</td>
-                                        <td><a href="view-report/{{ $sale->id }}"><i data-id="{{ $sale->id }}" style= "font-size: 20px;cursor: pointer;" class= "text-info fa-solid fa-eye" ></i></a></td>
+                                        {{-- <td><a href="view-report/{{ $sale->id }}"><i data-id="{{ $sale->id }}" style= "font-size: 20px;cursor: pointer;" class= "text-info fa-solid fa-eye" ></i></a></td> --}}
                                     </tr>
                                     @empty
                                     <tr>
